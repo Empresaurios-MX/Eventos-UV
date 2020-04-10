@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="images/vnd.microsoft.icon" href="images/favicon.ico"/>
+    <link rel="stylesheet" href="css/formulario.css">
+    <title>Formulario de Creación de Eventos</title>
+</head>
+<header>
+    <div class="header1">
+        Universidad Veracruzana
+    </div>
+    <div class="header2">
+        Eventos UV
+    </div>
+</header>
+<body>
+    
+    <div>
+        <fieldset>
+            <legend>Creación de Eventos</legend>        
+            <section class="section1">
+                <input type="text" size="40" maxlength="40" name="titulo" placeholder="Titulo del Evento">
+            </section>
+            <section class="section2">
+                <input type="text" size="40" maxlength="40" name="titulo" placeholder="Fecha del Evento">
+            </section>
+        </fieldset>
+    </div>
+    <div>
+        <fieldset>
+            <div>
+                <section class="section1">
+                    <figure>
+                        <img src="images/evento.png" alt="Foto">
+                    </figure>
+                </section>
+                <section class="section1">
+                    <p>
+                        <b>Descripción del Evento:</b>
+                        <textarea name="descripcion" rows="6" cols="40" placeholder="Descripción del Evento"></textarea>
+                    </p>
+                </section>
+                <section class="section1">
+                    <p>
+                        <b>Detalles del Evento:</b>
+                        <textarea name="descripcion" rows="6" cols="40" placeholder="Detalles del Evento"></textarea>
+                    </p>
+                </section>
+            </div>
+        </fieldset>
+    </div>
+    <div>
+        <p>Elija una o varias opciones:
+            <select name="etiquetas[]" multiple style="vertical-align: top;">
+                <option value="...">Uno</option>
+                <option value="1">Uno</option>
+                <option value="2">Dos</option>
+                <option value="3">Tres</option>
+                <option value="4">Cuatro</option>
+                <option value="5">Cinco</option>
+              </select>
+          </p>
+    </div>
+    <div>
+    <section class="section2">
+        <input class="btnIngresar" type="submit" value="Registrar Evento">
+    </section>
+    </div>
+</body>
+<footer>© 2020 Universidad Veracruzana. Todos los derechos reservados</footer>
+</html>
