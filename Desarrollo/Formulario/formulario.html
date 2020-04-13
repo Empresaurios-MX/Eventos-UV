@@ -24,7 +24,7 @@
                 <input type="text" size="40" maxlength="40" name="titulo" placeholder="Titulo del Evento">
             </section>
             <section class="section2">
-                <input type="text" size="40" maxlength="40" name="titulo" placeholder="Fecha del Evento">
+				<p>Fecha del Evento: <input type="date" name="fecha"></p>
             </section>
         </fieldset>
     </div>
@@ -33,34 +33,40 @@
             <div>
                 <section class="section1">
                     <figure>
-                        <img src="images/evento.png" alt="Foto">
+                        <img src="images/evento.png">
+						<p><input type="file" name="archivo" value="image/*"></p>
                     </figure>
                 </section>
                 <section class="section1">
                     <p>
                         <b>Descripción del Evento:</b>
-                        <textarea name="descripcion" rows="6" cols="200" placeholder="Descripción del Evento"></textarea>
+                        <textarea name="descripcion" rows="6" cols="130" placeholder="Descripción del Evento"></textarea>
                         <b>Detalles del Evento:</b>
-                        <textarea name="descripcion" rows="6" cols="200" placeholder="Detalles del Evento"></textarea>
+                        <textarea name="descripcion" rows="6" cols="130" placeholder="Detalles del Evento"></textarea>
                     </p>
                 </section>
             </div>
         </fieldset>
     </div>
     <div>
-        <p>Elija una o varias opciones:
-            <select name="etiquetas[]" multiple style="vertical-align: top;">
-                <option value="...">Uno</option>
-                <option value="1">Uno</option>
-                <option value="2">Dos</option>
-                <option value="3">Tres</option>
-                <option value="4">Cuatro</option>
-                <option value="5">Cinco</option>
-              </select>
-          </p>
+		<div>
+		<form>
+			<p>
+				<input type="checkbox" name="etiqueta1" value="1">Etiqueta 1<input type="checkbox" name="etiqueta2" value="2">Etiqueta 2<input type="checkbox" name="etiqueta3" value="3">Etiqueta 3<input type="checkbox" name="etiqueta4" value="4">Etiqueta 4<input type="checkbox" name="etiqueta5" value="5">Etiqueta 5<input type="checkbox" name="etiqueta6" value="6">Etiqueta 6<input type="checkbox" name="etiqueta7" value="7">Etiqueta 7<br>
+				<input type="checkbox" name="etiqueta8" value="8">Etiqueta 8<input type="checkbox" name="etiqueta9" value="9">Etiqueta 9<input type="checkbox" name="etiqueta10" value="10">Etiqueta 10<input type="checkbox" name="etiqueta11" value="11">Etiqueta 11<input type="checkbox" name="etiqueta12" value="12">Etiqueta 12<input type="checkbox" name="etiqueta13" value="13">Etiqueta 13<input type="checkbox" name="etiqueta14" value="14">Etiqueta 14
+			</p>
+		</form>
+		</div>
+		<div>
+			<input type="text" name="etiqueta1" placeholder="Etiqueta 1" readonly><input type="text" name="etiqueta2" placeholder="Etiqueta 2" readonly><input type="text" name="etiqueta3" placeholder="Etiqueta 3" readonly><input type="text" name="etiqueta4" placeholder="Etiqueta 4" readonly><input type="text" name="etiqueta5" placeholder="Etiqueta 5" readonly><input type="text" name="etiqueta6" placeholder="Etiqueta 6" readonly><input type="text" name="etiqueta7" placeholder="Etiqueta 7" readonly><br>
+			<input type="text" name="etiqueta8" placeholder="Etiqueta 8" readonly><input type="text" name="etiqueta9" placeholder="Etiqueta 9" readonly><input type="text" name="etiqueta10" placeholder="Etiqueta 10" readonly><input type="text" name="etiqueta11" placeholder="Etiqueta 11" readonly><input type="text" name="etiqueta12" placeholder="Etiqueta 12" readonly><input type="text" name="etiqueta13" placeholder="Etiqueta 13" readonly><input type="text" name="etiqueta14" placeholder="Etiqueta 14" readonly>
+		</div>
+		<div>
+			<p><input class="btnEtiqueta" type="reset" value="Agregar etiqueta"><input class="btnEtiqueta"type="reset" value="Borrar etiqueta"></p>
+		</div>
     </div>
     <div>
-    <section class="section2">
+    <section>
         <input class="btnIngresar" type="submit" value="Registrar Evento">
     </section>
     </div>

@@ -39,8 +39,14 @@ body{
 
 textarea{
     outline: none;
+	position: relative;
+    background: 0 0;
+	padding: 3px 0 3px;
+    font-size: 12px;
+	border: 1px solid rgba(#BDBDBD);
 }
-input[type="text"]{
+
+input[type="text"],[type="date"]{
     color: black;
     outline: none ;
     position: relative;
@@ -72,6 +78,18 @@ input[type="text"]{
 }
 
 .btnIngresar{
+	float: right;
+    padding: 10px;
+    color: #FFF;
+    background: #0D47A1;
+    width: 150px;
+    margin: 20px auto;
+    margin-top: 0;
+    border: 0;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.btnEtiqueta{
     padding: 10px;
     color: #FFF;
     background: #0D47A1;
