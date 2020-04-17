@@ -1,0 +1,112 @@
+body{
+    background-color: #BDBDBD;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+
+}
+
+.section1 {
+    float: left;
+    width: 26%;
+}
+.section2 {
+    float: right;
+    width: 30%;
+}
+
+.header1 {
+    display: block;
+    text-align: right;
+    background: #0D47A1;
+    color: #fff;
+    font-size: 14px;
+    font-weight: normal;
+    padding-bottom: 5px;
+    padding-top: 10px;
+}
+.header2 {
+    display: block;
+    text-align: left;
+    background: #2E7D32;
+    color: #fff;
+    font-size: 16px;
+    font-weight: normal;
+    padding-bottom: 5px;
+    padding-top: 10px;
+    
+}
+
+textarea{
+    outline: none;
+	position: relative;
+    background: 0 0;
+	padding: 3px 0 3px;
+    font-size: 12px;
+	border: 1px solid rgba(#BDBDBD);
+}
+
+input[type="text"],[type="date"]{
+    color: black;
+    outline: none ;
+    position: relative;
+    background: 0 0;
+    padding: 5px 0 5px;
+    font-size: 15px;
+    line-height: 1.4;
+    font-weight: 500;
+    border: 1px solid rgba(#BDBDBD);
+    border-width: 0 0 1px;
+    border-bottom: 1px solid #BDBDBD;
+    margin: 20px auto;
+}
+[type="password"],[type="email"]{
+    color: black;
+    outline: none;
+    position: relative;
+    background: 0 0;
+    padding: 5px 0 5px;
+    font-size: 15px;
+    line-height: 1.4;
+    font-weight: 500;
+    border: 1px solid rgba(#BDBDBD);
+    border-width: 0 0 1px;
+    display: block;
+    width: 350px;
+    border-bottom: 1px solid #BDBDBD;
+    margin: 20px auto;
+}
+
+.btnIngresar{
+	float: right;
+    padding: 10px;
+    color: #FFF;
+    background: #0D47A1;
+    width: 150px;
+    margin: 20px auto;
+    margin-top: 0;
+    border: 0;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.btnEtiqueta{
+    padding: 10px;
+    color: #FFF;
+    background: #0D47A1;
+    width: 150px;
+    margin: 20px auto;
+    margin-top: 0;
+    border: 0;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+footer {
+    text-align: right;
+    font-size: 14px;
+    font-family: sans-serif;
+    color: black;
+    bottom: 0;
+    position:fixed;
+}
+
