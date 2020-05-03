@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Login} from '../../models/login';
+import {UsuarioDataService} from '../../services/usuario.data.service';
+import {Usuario} from '../../models/usuario';
 
 @Component({
   selector: 'app-signin',
@@ -7,18 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SigninComponent implements OnInit {
 
-  constructor() { }
+  login: Login;
+  usuario: Usuario;
 
-  user = {
-    email: '',
-    password: ''
+  constructor(private service: UsuarioDataService) {
   }
 
   ngOnInit(): void {
+    this.login = new Login();
   }
 
-  signIn(){
-    console.log(this.user)
+  signIn() {
+    if (this.login.rol === 'estudiante' || this.login.rol === 'administrador') {
+      this.service.login(this.login).subscribe(response => {
+        this.usuario = response;
+      });
+    } else {
+      window.alert('Debe selecionar un rol');
+    }
   }
 
 }
