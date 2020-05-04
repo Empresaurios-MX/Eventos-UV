@@ -10,6 +10,7 @@ import {EventsComponent} from './components/events/events.component';
 import {EventsConfirmedComponent} from './components/events-confirmed/events-confirmed.component';
 import {UsuarioDataService} from './services/usuario.data.service';
 import {HttpClientModule} from '@angular/common/http';
+import { MyEventsComponent } from './components/my-events/my-events.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {HttpClientModule} from '@angular/common/http';
     SignupComponent,
     SigninComponent,
     EventsComponent,
-    EventsConfirmedComponent
+    EventsConfirmedComponent,
+    MyEventsComponent
   ],
   imports: [
     BrowserModule,

@@ -6,12 +6,12 @@ import { EventsComponent } from './components/events/events.component';
 import { EventsConfirmedComponent } from './components/events-confirmed/events-confirmed.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
+import { MyEventsComponent } from './components/my-events/my-events.component'
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: '/eventos',
-    pathMatch: 'full'
+    path: 'miseventos',
+    component: MyEventsComponent
   },
   {
     path: 'eventos',
@@ -23,7 +23,8 @@ const routes: Routes = [
   },
   {
     path: 'signin',
-    component: SigninComponent
+    component: SigninComponent,
+    pathMatch: 'full'
   },
   {
     path: 'signup',
