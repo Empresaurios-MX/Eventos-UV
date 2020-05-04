@@ -8,7 +8,6 @@ import {SignupComponent} from './components/signup/signup.component';
 import {SigninComponent} from './components/signin/signin.component';
 import {EventsComponent} from './components/events/events.component';
 import {EventsConfirmedComponent} from './components/events-confirmed/events-confirmed.component';
-import {EventsPastComponent} from './components/events-past/events-past.component';
 import {UsuarioDataService} from './services/usuario.data.service';
 import {HttpClientModule} from '@angular/common/http';
 
@@ -18,8 +17,7 @@ import {HttpClientModule} from '@angular/common/http';
     SignupComponent,
     SigninComponent,
     EventsComponent,
-    EventsConfirmedComponent,
-    EventsPastComponent
+    EventsConfirmedComponent
   ],
   imports: [
     BrowserModule,

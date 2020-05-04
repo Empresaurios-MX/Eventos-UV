@@ -25,6 +25,7 @@ export class SigninComponent implements OnInit {
       this.service.login(this.login).subscribe(response => {
         this.usuario = response;
       });
+      console.log(Response);
     } else {
       window.alert('Debe selecionar un rol');
     }
