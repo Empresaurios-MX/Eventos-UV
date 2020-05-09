@@ -1,0 +1,17 @@
+runtime: nodejs
+env: flex
+manual_scaling:
+  instances: 1
+resources:
+  cpu: 1
+  memory_gb: 1.7
+  disk_size_gb: 10
+# [START configuration]
+endpoints_api_service:
+  # The following values are to be replaced by information from the output of
+  # 'gcloud endpoints services deploy openapi-appengine.yaml' command.
+  name: project
+  #rollout_strategy: managed
+  # Copyright 2015-2016, Google,
+  config_id: 2019-11-14r0 # date
+# [END configuration]

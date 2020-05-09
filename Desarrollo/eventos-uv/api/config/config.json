@@ -1,0 +1,32 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "root",
+    "database": "testing",
+    "host": "127.0.0.1",
+    "dialect": "postgresql",
+    "operatorsAliases": 0
+  },
+  "test": {
+    "username": "database_username",
+    "password": "database_password",
+    "database": "database_name",
+    "host": "127.0.0.1",
+    "dialect": "postgresql",
+    "operatorsAliases": 0
+  },
+  "production": {
+    "username": "postgres",
+    "password": "root",
+    "database": "testing",
+    "host": "127.0.0.1",
+    "dialect": "postgresql",
+    "operatorsAliases": 0,
+    "ssl": true,
+    "dialectOptions": {
+      "ssl": {
+        "require": true
+      }
+    }
+  }
+}
