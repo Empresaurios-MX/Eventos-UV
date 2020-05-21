@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { EventoDataService } from "../../services/eventos.data.service";
+import {Component, OnInit} from '@angular/core';
+import {EventoDataService} from '../../services/evento.data.service';
+import {Evento} from '../../models/evento';
 
 @Component({
   selector: 'app-tasks',
@@ -8,20 +9,21 @@ import { EventoDataService } from "../../services/eventos.data.service";
 })
 export class EventsComponent implements OnInit {
 
-  eventos = [];
+  eventos: any;
 
-  constructor(private eventService: EventoDataService) { }
-
-  ngOnInit() {
-    this.eventService.getEventos()
-      .subscribe(
-        res => {
-          console.log(res)
-          this.eventos = res;
-        },
-        err => console.log(err)
-      )
+  constructor(private eventService: EventoDataService) {
+    this.eventos = [];
   }
 
+  ngOnInit() {
+    this.getEventos();
+  }
+
+  getEventos() {
+    this.eventService.findAll().subscribe(value => {
+      console.log(value);
+      this.eventos = value;
+    });
+  }
 }
 
