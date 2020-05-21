@@ -1,1 +1,22 @@
-<p>my-events works!</p>
+<div class="col text-center">
+    <a href="#" class="btn btn-primary">Crear evento</a>
+</div>
+<div class="card rounded" *ngFor="let evento of eventos">
+    <div class="card-body">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img src="{{evento.foto}}" class="rounded float-left" width="200" height="200">
+            </div>
+            <div class="col-md-8 ">
+                <h5 class="card-title">{{evento.nombre}}</h5>
+                <p class="card-text">{{evento.descripcion}}</p>
+                <h6 class="card-subtitle mb-2">{{evento.invitado}}</h6>
+                <p>Fecha: {{evento.fecha}}</p>
+                <p>Hora: {{evento.hora}}</p>
+                <p>Tags: {{evento.tags}}</p>
+                <a href="#" class="btn btn-warning">Editar</a>
+                <a href="#" class="btn btn-danger">Eliminar</a>
+            </div>
+        </div>
+    </div>
+</div>
