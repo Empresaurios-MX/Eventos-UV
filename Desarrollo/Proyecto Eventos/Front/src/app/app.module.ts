@@ -11,6 +11,7 @@ import {EventsConfirmedComponent} from './components/events-confirmed/events-con
 import {UsuarioDataService} from './services/usuario.data.service';
 import {HttpClientModule} from '@angular/common/http';
 import { MyEventsComponent } from './components/my-events/my-events.component';
+import {EventoDataService} from "./services/evento.data.service";
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { MyEventsComponent } from './components/my-events/my-events.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [UsuarioDataService],
+  providers: [UsuarioDataService, EventoDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
