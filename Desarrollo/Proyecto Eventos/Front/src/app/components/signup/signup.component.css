@@ -40,7 +40,6 @@ input[type="text"]{
     border: 1px solid rgba(#BDBDBD);
     border-width: 0 0 1px;
     display: block;
-    width: 350px;
     border-bottom: 1px solid #BDBDBD;
     margin: 20px auto;
 }
@@ -57,6 +56,10 @@ input[type="text"]{
     border-radius: 3px;
     cursor: pointer;
     border: 2px solid #0D47A1;
+}
+
+.cardAdjustment{
+    width: 350px;
 }
 
 footer {
