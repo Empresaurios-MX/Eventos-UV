@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { EventoDataService } from "../../services/evento.data.service";
+import {Component, OnInit} from '@angular/core';
+import {EventoDataService} from '../../services/evento.data.service';
 
 @Component({
   selector: 'app-my-events',
@@ -25,7 +25,7 @@ export class MyEventsComponent implements OnInit {
     });
   }
 
-  deleteEventos(){
+  deleteEventos() {
     this.eventService.delete();
   }
 }

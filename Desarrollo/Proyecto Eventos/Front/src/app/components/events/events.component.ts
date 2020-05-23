@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {EventoDataService} from '../../services/evento.data.service';
-import {Evento} from '../../models/evento';
 
 @Component({
   selector: 'app-tasks',
