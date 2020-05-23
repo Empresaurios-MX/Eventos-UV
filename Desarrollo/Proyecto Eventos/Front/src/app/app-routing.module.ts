@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 
 // Componentes
-import { EventsComponent } from './components/events/events.component';
-import { EventsConfirmedComponent } from './components/events-confirmed/events-confirmed.component';
-import { SignupComponent } from './components/signup/signup.component';
-import { SigninComponent } from './components/signin/signin.component';
-import { MyEventsComponent } from './components/my-events/my-events.component'
+import {EventsComponent} from './components/events/events.component';
+import {EventsConfirmedComponent} from './components/events-confirmed/events-confirmed.component';
+import {SignupComponent} from './components/signup/signup.component';
+import {SigninComponent} from './components/signin/signin.component';
+import {MyEventsComponent} from './components/my-events/my-events.component'
 
 const routes: Routes = [
   {
@@ -36,4 +36,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
