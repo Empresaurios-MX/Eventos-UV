@@ -28,8 +28,8 @@ export class EventoDataService {
     return this.http.post<Evento>(this.apiURL + '/eventos', evento, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
-  delete(): Observable<Evento>{
-    return this.http.delete<Evento>(this.apiURL + '/eventos', this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  delete() {
+    return this.http.delete(this.apiURL + '/eventos', this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
   handleError(error) {
