@@ -1,5 +1,7 @@
 <div class="col text-center mb-3">
-  <a href="#" class="btn btn-primary">Crear evento</a>
+  <button class="btn btn-primary" (click)="mostrarModal(nombreModal)">
+    Crear evento
+  </button>
 </div>
 <div class="card rounded" *ngFor="let evento of eventos">
   <div class="card-body">
@@ -15,10 +17,128 @@
         <p>Hora: {{evento.hora}}</p>
         <p>Tags: {{evento.tags}}</p>
         <div class="row">
-          <a href="#" class="btn btn-primary mx-3">Editar</a>
-          <a href="#" class="btn btn btn-outline-primary">Eliminar</a>
+          <a href="#" class="btn btn-secondary mx-3">Editar</a>
+          <a href="#" class="btn btn btn-danger">Eliminar</a>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<ng-template #nombreModal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Crear evento</h5>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Nombre:</label>
+          <input type="text" [(ngModel)]="evento.nombre" name="nombre" class="form-control" id="recipient-name"
+            autocomplete="off">
+        </div>
+
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Descripcion:</label>
+          <input type="text" [(ngModel)]="evento.descripcion" name="descripcion" class="form-control"
+            id="recipient-name" autocomplete="off">
+        </div>
+
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Invitados:</label>
+          <input type="text" [(ngModel)]="evento.invitados" name="invitados" class="form-control" id="recipient-name"
+            autocomplete="off">
+        </div>
+
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Fecha:</label>
+          <input type="text" [(ngModel)]="evento.fecha" name="fecha" class="form-control" id="recipient-name"
+            autocomplete="off">
+        </div>
+
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Hora:</label>
+          <input type="text" [(ngModel)]="evento.hora" name="hora" class="form-control" id="recipient-name"
+            autocomplete="off">
+        </div>
+
+        <div class="form-group">
+          <label for="recipient-name" class="col-form-label">Foto:</label>
+          <input type="text" [(ngModel)]="evento.foto" name="foto" class="form-control" id="recipient-name"
+            autocomplete="off">
+        </div>
+
+        <label class="col-form-label">Tags</label>
+            <div class="form-group">
+              <div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input type="checkbox" class="custom-control-input" id="check1" [checked]="arte"
+                         (change)="check('arte', !arte)">
+                  <label class="custom-control-label" for="check1">Arte</label>
+                </div>
+
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input type="checkbox" class="custom-control-input" id="check2" [checked]="musica"
+                         (change)="check('musica', !musica)">
+                  <label class="custom-control-label" for="check2">Música</label>
+                </div>
+
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input type="checkbox" class="custom-control-input" id="check3" [checked]="ciencia"
+                         (change)="check('ciencia', !ciencia)">
+                  <label class="custom-control-label" for="check3">Ciencia</label>
+                </div>
+
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input type="checkbox" class="custom-control-input" id="check6" [checked]="baile"
+                         (change)="check('baile', !baile)">
+                  <label class="custom-control-label" for="check6">Baile</label>
+                </div>
+              </div>
+
+              <div style="height: 0.75em"></div>
+
+              <div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input type="checkbox" class="custom-control-input" id="check5" [checked]="medicina"
+                         (change)="check('medicina', !medicina)">
+                  <label class="custom-control-label" for="check5">Medicina</label>
+                </div>
+
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input type="checkbox" class="custom-control-input" id="check4" [checked]="cultura"
+                         (change)="check('cultura', !cultura)">
+                  <label class="custom-control-label" for="check4">Cultura</label>
+                </div>
+
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input type="checkbox" class="custom-control-input" id="check7" [checked]="recreacion"
+                         (change)="check('recreacion', !recreacion)">
+                  <label class="custom-control-label" for="check7">Recreación</label>
+                </div>
+              </div>
+
+              <div style="height: 0.75em"></div>
+
+              <div>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input type="checkbox" class="custom-control-input" id="check8" [checked]="literatura"
+                         (change)="check('literatura', !literatura)">
+                  <label class="custom-control-label" for="check8">Literatura</label>
+                </div>
+
+                <div class="custom-control custom-checkbox custom-control-inline">
+                  <input type="checkbox" class="custom-control-input" id="check9" [checked]="especial"
+                         (change)="check('especial', !especial)">
+                  <label class="custom-control-label" for="check9">Especial</label>
+                </div>
+              </div>
+            </div>
+
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="createEvento()">Confirmar</button>
+    </div>
+  </div>
+</ng-template>
