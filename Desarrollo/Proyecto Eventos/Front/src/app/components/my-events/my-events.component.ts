@@ -52,6 +52,7 @@ export class MyEventsComponent implements OnInit {
     this.eventService.create(this.evento).subscribe(res => {
       if(res){
         console.log('Evento creado');
+        this.getEventos();
       }
       console.log(res)
     })
@@ -67,6 +68,7 @@ export class MyEventsComponent implements OnInit {
     this.eventService.delete(id).subscribe(res => {
       if(res){
         console.log('Evento eliminado');
+        this.getEventos();
       }
       console.log(res);
     });
