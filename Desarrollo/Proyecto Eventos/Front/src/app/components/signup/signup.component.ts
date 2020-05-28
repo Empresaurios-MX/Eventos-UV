@@ -55,31 +55,31 @@ export class SignupComponent implements OnInit {
     const intereses = [];
 
     if (this.arte) {
-      intereses.push('ARTE');
+      intereses.push('Arte');
     }
     if (this.musica) {
-      intereses.push('MUSICA');
+      intereses.push('Musica');
     }
     if (this.ciencia) {
-      intereses.push('CIENCIA');
+      intereses.push('Ciencia');
     }
     if (this.baile) {
-      intereses.push('BAILE');
+      intereses.push('Baile');
     }
     if (this.medicina) {
-      intereses.push('MEDICINA');
+      intereses.push('Medicina');
     }
     if (this.cultura) {
-      intereses.push('CULTURA');
+      intereses.push('Cultura');
     }
     if (this.recreacion) {
-      intereses.push('RECREACION');
+      intereses.push('Recreacion');
     }
     if (this.literatura) {
-      intereses.push('LITERATURA');
+      intereses.push('Literatura');
     }
     if (this.especial) {
-      intereses.push('ESPECIAL');
+      intereses.push('Especial');
     }
 
     return intereses;
