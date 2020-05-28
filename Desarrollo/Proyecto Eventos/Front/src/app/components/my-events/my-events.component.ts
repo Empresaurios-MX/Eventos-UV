@@ -64,7 +64,12 @@ export class MyEventsComponent implements OnInit {
   }
 
   deleteEvento(id) {
-    this.eventService.delete(id);
+    this.eventService.delete(id).subscribe(res => {
+      if(res){
+        console.log('Evento eliminado');
+      }
+      console.log(res);
+    });
   }
 
   
