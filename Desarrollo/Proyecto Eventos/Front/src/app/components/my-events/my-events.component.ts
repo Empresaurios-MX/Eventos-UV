@@ -63,8 +63,8 @@ export class MyEventsComponent implements OnInit {
     });
   }
 
-  deleteEventos() {
-    this.eventService.delete();
+  deleteEvento(id) {
+    this.eventService.delete(id);
   }
 
   
