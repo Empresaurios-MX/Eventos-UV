@@ -45,7 +45,7 @@ export class SignupComponent implements OnInit {
 
     this.service.register(this.usuario).subscribe(response => {
       if (response) {
-        console.log('Registrado!');
+        console.log('Registrado');
       }
       console.log(response);
     });
