@@ -14,12 +14,20 @@ function postUsuario(req, res) {
 
     const usuarioIn = req.body;
 
-    if(usuarioIn.rol !== 'administrador' && usuarioIn.rol !== 'estudiante') {
+    if (usuarioIn.rol !== 'administrador' && usuarioIn.rol !== 'estudiante') {
         return res.status(422).send({message: 'El rol debe ser "estudiante" o "administrador"'})
     }
 
-    return usuario.create(usuarioIn)
-        .then(usuario => res.status(201).send(usuario))
+    usuario.findOne({where: {email: usuarioIn.email}})
+        .then(value => {
+            if (value) {
+                res.status(409).send({message: "El email ya se encuentra registrado"});
+            } else {
+                return usuario.create(usuarioIn)
+                    .then(usuario => res.status(201).send(usuario))
+                    .catch(error => res.status(400).send(error));
+            }
+        })
         .catch(error => res.status(400).send(error));
 }
 

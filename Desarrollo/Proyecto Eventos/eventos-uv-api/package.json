@@ -23,6 +23,7 @@
     "supertest": "^4.0.2"
   },
   "scripts": {
+    "run": "swagger project start",
     "start": "node app.js",
     "test": "swagger project test"
   }

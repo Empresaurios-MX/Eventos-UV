@@ -72,6 +72,10 @@ paths:
           description: Success
           schema:
             $ref: "#/definitions/UsuarioResponse"
+        "409":
+          description: Email Conflict
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         default:
           description: Error
           schema:
