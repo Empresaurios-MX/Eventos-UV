@@ -1,5 +1,5 @@
 {
-  "name": "eventos-uv-api",
+  "name": "eventos-uv",
   "version": "1.0.0",
   "private": true,
   "description": "Example of how to use tokens",
@@ -23,6 +23,7 @@
     "supertest": "^4.0.2"
   },
   "scripts": {
+    "run": "swagger project start",
     "start": "node app.js",
     "test": "swagger project test"
   }
