@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Evento } from '../../models/evento'
 import { EventoDataService } from '../../services/evento.data.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAlert } from '@ng-bootstrap/ng-bootstrap'
 
 @Component({
   selector: 'app-my-events',
@@ -22,6 +23,7 @@ export class MyEventsComponent implements OnInit {
   recreacion: boolean;
   literatura: boolean;
   especial: boolean;
+
 
   constructor(private eventService: EventoDataService, private modalService: NgbModal) {
     this.eventos = [];
@@ -52,6 +54,7 @@ export class MyEventsComponent implements OnInit {
     this.eventService.create(this.evento).subscribe(res => {
       if(res){
         console.log('Evento creado');
+        this.modalService.dismissAll(true);
         this.getEventos();
       }
       console.log(res)
@@ -67,13 +70,12 @@ export class MyEventsComponent implements OnInit {
   deleteEvento(id) {
     this.eventService.delete(id).subscribe(res => {
       if(res){
-        console.log('Evento eliminado');
+
         this.getEventos();
       }
       console.log(res);
     });
   }
-
   
   getTags(): string[] {
     const intereses = [];
