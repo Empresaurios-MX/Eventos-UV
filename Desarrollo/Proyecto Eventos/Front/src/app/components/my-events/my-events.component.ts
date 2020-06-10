@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Evento } from '../../models/evento'
 import { EventoDataService } from '../../services/evento.data.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-my-events',
@@ -26,13 +28,25 @@ export class MyEventsComponent implements OnInit {
   especial: boolean;
 
 
-  constructor(private eventService: EventoDataService, private modalService: NgbModal) {
+  constructor(private eventService: EventoDataService, private modalService: NgbModal, private toastr: ToastrService) {
     this.eventos = [];
   }
 
-  ngOnInit() {
-    this.getEventos();
+  notificacionExitosaCrear(){
+    this.toastr.success("Evento agregado exitosamente")
+  }
 
+  notificacionExitosaEditar(){
+    this.toastr.success("Evento editado exitosamente")
+  }
+
+  notificacionExitosaEliminar(nombre){
+    this.toastr.success("Evento " + nombre + " eliminado exitosamente")
+  }
+
+
+  ngOnInit() {
+    this.getEventos();  
     this.arte = false;
     this.musica = false;
     this.ciencia = false;
@@ -58,16 +72,17 @@ export class MyEventsComponent implements OnInit {
     this.evento.realizado = false;
     this.eventService.create(this.evento).subscribe(res => {
       if(res){
+        this.notificacionExitosaCrear();
         this.modalService.dismissAll(true);
         this.getEventos();
       }
-      console.log(res)
     })
   }
 
   updateEvento(){
     this.eventService.update(this.evento.id, this.evento).subscribe(res => {
       if(res){
+        this.notificacionExitosaEditar();
         this.modalService.dismissAll(true);
         this.getEventos();
       }
@@ -90,6 +105,7 @@ export class MyEventsComponent implements OnInit {
   deleteEvento(id) {
     this.eventService.delete(id).subscribe(res => {
       if(res){      
+        this.notificacionExitosaEliminar(this.evento.nombre);
         this.getEventos();
       }
     });
