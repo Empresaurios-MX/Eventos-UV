@@ -157,37 +157,37 @@
       <form>
         <div class="form-group">
           <label for="recipient-name" class="col-form-label">Nombre:</label>
-          <input type="text" [(ngModel)]="evento.nombre"  name="nombre" class="form-control" id="recipient-name"
+          <input type="text" *ngIf="evento" [(ngModel)]="evento.nombre"  name="nombre" class="form-control" id="recipient-name"
             autocomplete="off">
         </div>
 
         <div class="form-group">
           <label for="recipient-name" class="col-form-label">Descripcion:</label>
-          <input type="text" [(ngModel)]="evento.descripcion" name="descripcion" class="form-control"
+          <input type="text" *ngIf="evento" [(ngModel)]="evento.descripcion" name="descripcion" class="form-control"
             id="recipient-name" autocomplete="off">
         </div>
 
         <div class="form-group">
           <label for="recipient-name" class="col-form-label">Invitados:</label>
-          <input type="text" [(ngModel)]="evento.invitados" name="invitados" class="form-control" id="recipient-name"
+          <input type="text" *ngIf="evento" [(ngModel)]="evento.invitados" name="invitados" class="form-control" id="recipient-name"
             autocomplete="off">
         </div>
 
         <div class="form-group">
           <label for="recipient-name" class="col-form-label">Fecha:</label>
-          <input type="text" [(ngModel)]="evento.fecha" name="fecha" class="form-control" id="recipient-name"
+          <input type="text" *ngIf="evento" [(ngModel)]="evento.fecha" name="fecha" class="form-control" id="recipient-name"
             autocomplete="off">
         </div>
 
         <div class="form-group">
           <label for="recipient-name" class="col-form-label">Hora:</label>
-          <input type="text" [(ngModel)]="evento.hora" name="hora" class="form-control" id="recipient-name"
+          <input type="text" *ngIf="evento" [(ngModel)]="evento.hora" name="hora" class="form-control" id="recipient-name"
             autocomplete="off">
         </div>
 
         <div class="form-group">
           <label for="recipient-name" class="col-form-label">Foto:</label>
-          <input type="text" [(ngModel)]="evento.foto" name="foto" class="form-control" id="recipient-name"
+          <input type="text" *ngIf="evento" [(ngModel)]="evento.foto" name="foto" class="form-control" id="recipient-name"
             autocomplete="off">
         </div>
 
