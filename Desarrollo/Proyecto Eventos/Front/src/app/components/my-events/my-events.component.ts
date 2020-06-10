@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Evento } from '../../models/evento'
 import { EventoDataService } from '../../services/evento.data.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { NgbAlert } from '@ng-bootstrap/ng-bootstrap'
 
 @Component({
   selector: 'app-my-events',
   templateUrl: './my-events.component.html',
   styleUrls: ['./my-events.component.css']
 })
+
+
 export class MyEventsComponent implements OnInit {
 
   eventos: any;
@@ -29,11 +30,6 @@ export class MyEventsComponent implements OnInit {
     this.eventos = [];
   }
 
-  mostrarModal(modal){
-    this.evento = new Evento();
-    this.modalService.open(modal);
-  }
-
   ngOnInit() {
     this.getEventos();
 
@@ -48,12 +44,20 @@ export class MyEventsComponent implements OnInit {
     this.especial = false;
   }
 
+  mostrarModal(modal){
+    this.evento = new Evento();
+    this.modalService.open(modal);
+  }
+
+  mostrarModalEditar(modal){
+    this.modalService.open(modal);
+  }
+
   createEvento(){
     this.evento.tags = this.getTags();
     this.evento.realizado = false;
     this.eventService.create(this.evento).subscribe(res => {
       if(res){
-        console.log('Evento creado');
         this.modalService.dismissAll(true);
         this.getEventos();
       }
@@ -61,19 +65,33 @@ export class MyEventsComponent implements OnInit {
     })
   }
 
+  updateEvento(){
+    this.eventService.update(this.evento.id, this.evento).subscribe(res => {
+      if(res){
+        this.modalService.dismissAll(true);
+        this.getEventos();
+      }
+    });
+
+  }
+
+  getEvento(id){
+    this.eventService.findOne(id).subscribe(res => {
+      this.evento = res;
+    });
+  }
+
   getEventos() {
-    this.eventService.findAll().subscribe(value => {
-      this.eventos = value;
+    this.eventService.findAll().subscribe(res => {
+      this.eventos = res;
     });
   }
 
   deleteEvento(id) {
     this.eventService.delete(id).subscribe(res => {
-      if(res){
-
+      if(res){      
         this.getEventos();
       }
-      console.log(res);
     });
   }
   

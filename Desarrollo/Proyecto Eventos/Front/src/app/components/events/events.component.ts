@@ -19,9 +19,8 @@ export class EventsComponent implements OnInit {
   }
 
   getEventos() {
-    this.eventService.findAll().subscribe(value => {
-      console.log(value);
-      this.eventos = value;
+    this.eventService.findAll().subscribe(res => {
+      this.eventos = res;
     });
   }
 }

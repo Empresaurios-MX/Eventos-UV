@@ -24,13 +24,20 @@ export class EventoDataService {
     return this.http.get<Evento>(this.apiURL + '/eventos', this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
+  findOne(id): Observable<Evento>{
+    return this.http.get<Evento>(this.apiURL + '/eventos/' + id, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
+
   create(evento: Evento): Observable<Evento> {
     return this.http.post<Evento>(this.apiURL + '/eventos', evento, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
   delete(id): Observable<Evento> {
     return this.http.delete<Evento>(this.apiURL + '/eventos/' + id, this.httpOptions).pipe(retry(1), catchError(this.handleError));
-    //return this.http.delete(this.apiURL + '/eventos/' + id).subscribe(data => {})
+  }
+
+  update(id, evento: Evento){
+    return this.http.put<Evento>(this.apiURL + '/eventos/' + id , evento, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
   handleError(error) {
