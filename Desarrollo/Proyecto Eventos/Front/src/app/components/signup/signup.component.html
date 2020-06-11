@@ -1,9 +1,9 @@
-<div class="container">
-  <div class="row">
-    <div class="d-none d-sm-none d-md-none d-lg-none d-xl-block">
-      <img src="../../../assets/images/USBI.jpg" class="img-ts float-xs-left mx-auto d-block container-fluid ">
-    </div>
-    <div class="mx-lg-auto cardAdjustment">
+<div class="row">
+  <div class="d-none d-sm-none d-md-none d-lg-none d-xl-block">
+    <img src="../../../assets/images/USBI.jpg" class="img-ts float-xs-left mx-auto d-block container-fluid" width="43%">
+  </div>
+  <div class="mx-lg-auto cardAdjustment">
+    <div class="container p-4">
       <div class="card">
         <div class="card-header">
           Registro de nuevos usuarios
@@ -13,24 +13,22 @@
 
             <div class="form-group">
               <input type="text" [(ngModel)]="usuario.nombre" [ngModelOptions]="{standalone: true}" class="form-control"
-                     placeholder="Nombre(s)">
+                placeholder="Nombre(s)">
             </div>
 
             <div class="form-group">
               <input type="text" [(ngModel)]="usuario.apellidos" [ngModelOptions]="{standalone: true}"
-                     class="form-control"
-                     placeholder="Apellidos">
+                class="form-control" placeholder="Apellidos">
             </div>
 
             <div class="form-group">
               <input type="email" [(ngModel)]="usuario.email" [ngModelOptions]="{standalone: true}" class="form-control"
-                     placeholder="Correo electronico">
+                placeholder="Correo electronico">
             </div>
 
             <div class="form-group">
               <input type="password" [(ngModel)]="usuario.password" [ngModelOptions]="{standalone: true}"
-                     class="form-control"
-                     placeholder="Contraseña">
+                class="form-control" placeholder="Contraseña">
             </div>
 
             <label class="col-form-label">Intereses</label>
@@ -38,25 +36,25 @@
               <div>
                 <div class="custom-control custom-checkbox custom-control-inline">
                   <input type="checkbox" class="custom-control-input" id="check1" [checked]="arte"
-                         (change)="check('arte', !arte)">
+                    (change)="check('arte', !arte)">
                   <label class="custom-control-label" for="check1">Arte</label>
                 </div>
 
                 <div class="custom-control custom-checkbox custom-control-inline">
                   <input type="checkbox" class="custom-control-input" id="check2" [checked]="musica"
-                         (change)="check('musica', !musica)">
+                    (change)="check('musica', !musica)">
                   <label class="custom-control-label" for="check2">Música</label>
                 </div>
 
                 <div class="custom-control custom-checkbox custom-control-inline">
                   <input type="checkbox" class="custom-control-input" id="check3" [checked]="ciencia"
-                         (change)="check('ciencia', !ciencia)">
+                    (change)="check('ciencia', !ciencia)">
                   <label class="custom-control-label" for="check3">Ciencia</label>
                 </div>
 
                 <div class="custom-control custom-checkbox custom-control-inline">
                   <input type="checkbox" class="custom-control-input" id="check6" [checked]="baile"
-                         (change)="check('baile', !baile)">
+                    (change)="check('baile', !baile)">
                   <label class="custom-control-label" for="check6">Baile</label>
                 </div>
               </div>
@@ -66,19 +64,19 @@
               <div>
                 <div class="custom-control custom-checkbox custom-control-inline">
                   <input type="checkbox" class="custom-control-input" id="check5" [checked]="medicina"
-                         (change)="check('medicina', !medicina)">
+                    (change)="check('medicina', !medicina)">
                   <label class="custom-control-label" for="check5">Medicina</label>
                 </div>
 
                 <div class="custom-control custom-checkbox custom-control-inline">
                   <input type="checkbox" class="custom-control-input" id="check4" [checked]="cultura"
-                         (change)="check('cultura', !cultura)">
+                    (change)="check('cultura', !cultura)">
                   <label class="custom-control-label" for="check4">Cultura</label>
                 </div>
 
                 <div class="custom-control custom-checkbox custom-control-inline">
                   <input type="checkbox" class="custom-control-input" id="check7" [checked]="recreacion"
-                         (change)="check('recreacion', !recreacion)">
+                    (change)="check('recreacion', !recreacion)">
                   <label class="custom-control-label" for="check7">Recreación</label>
                 </div>
               </div>
@@ -88,13 +86,13 @@
               <div>
                 <div class="custom-control custom-checkbox custom-control-inline">
                   <input type="checkbox" class="custom-control-input" id="check8" [checked]="literatura"
-                         (change)="check('literatura', !literatura)">
+                    (change)="check('literatura', !literatura)">
                   <label class="custom-control-label" for="check8">Literatura</label>
                 </div>
 
                 <div class="custom-control custom-checkbox custom-control-inline">
                   <input type="checkbox" class="custom-control-input" id="check9" [checked]="especial"
-                         (change)="check('especial', !especial)">
+                    (change)="check('especial', !especial)">
                   <label class="custom-control-label" for="check9">Especial</label>
                 </div>
               </div>
@@ -108,5 +106,4 @@
       </div>
     </div>
   </div>
-
 </div>

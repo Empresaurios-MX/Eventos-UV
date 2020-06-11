@@ -1,4 +1,3 @@
-
 body {
   margin: 0;
   padding: 0;
@@ -60,7 +59,7 @@ input[type="text"] {
 }
 
 .cardAdjustment {
-  width: 350px;
+  width: 450px;
 }
 
 footer {

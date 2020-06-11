@@ -1,17 +1,19 @@
-<div class="card rounded" *ngFor="let evento of eventos">
-  <div class="card-body">
-    <div class="row no-gutters">
-      <div class="col-md-4">
-        <img src="{{evento.foto}}" class="rounded float-left" width="200" height="200">
-      </div>
-      <div class="col-md-8 ">
-        <h5 class="card-title">{{evento.nombre}}</h5>
-        <p class="card-text">{{evento.descripcion}}</p>
-        <p>Impartido por: {{evento.invitados}}</p>
-        <p>Fecha: {{evento.fecha}}</p>
-        <p>Hora: {{evento.hora}}</p>
-        <p>Tags: {{evento.tags}}</p>
-        <a href="#" class="btn btn-primary">Voy a asistir</a>
+<div class="container p-4">
+  <div class="card rounded" *ngFor="let evento of eventos">
+    <div class="card-body">
+      <div class="row no-gutters">
+        <div class="col-md-3">
+          <img src="{{evento.foto}}" class="rounded float-left" width="240" height="240">
+        </div>
+        <div class="col-md-8">
+          <h5 class="card-title">{{evento.nombre}}</h5>
+          <p class="card-text">{{evento.descripcion}}</p>
+          <p>Impartido por: {{evento.invitados}}</p>
+          <p>Fecha: {{evento.fecha}}</p>
+          <p>Hora: {{evento.hora}}</p>
+          <p>Tags: {{evento.tags}}</p>
+          <a href="#" class="btn btn-primary">Voy a asistir</a>
+        </div>
       </div>
     </div>
   </div>
