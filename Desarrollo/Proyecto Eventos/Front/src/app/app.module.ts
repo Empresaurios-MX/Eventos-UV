@@ -7,6 +7,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 import {SignupComponent} from './components/signup/signup.component';
 import {SigninComponent} from './components/signin/signin.component';
 import {EventsComponent} from './components/events/events.component';
@@ -16,6 +17,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {MyEventsComponent} from './components/my-events/my-events.component';
 import {EventoDataService} from './services/evento.data.service';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +25,8 @@ import {EventoDataService} from './services/evento.data.service';
     SigninComponent,
     EventsComponent,
     EventsConfirmedComponent,
-    MyEventsComponent
+    MyEventsComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
