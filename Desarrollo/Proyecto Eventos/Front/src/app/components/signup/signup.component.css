@@ -73,3 +73,11 @@ footer {
 img {
   display: none;
 }
+
+div.row{
+  margin-right: 0px;
+}
+
+div.container-fluid{
+  padding-right: 0px;
+}
