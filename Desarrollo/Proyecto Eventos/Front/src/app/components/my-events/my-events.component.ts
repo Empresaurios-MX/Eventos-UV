@@ -150,7 +150,7 @@ export class MyEventsComponent implements OnInit {
 
   mostrarModal(modal){
     this.evento = new Evento();
-    this.modalService.open(modal);
+    this.modalService.open(modal, { size: 'lg' });
   }
 
   mostrarModalEditar(modal){
