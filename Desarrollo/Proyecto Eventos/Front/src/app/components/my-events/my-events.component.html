@@ -13,7 +13,7 @@
         <div class="col-md-3">
           <img src="{{evento.foto}}" class="rounded float-left" width="240" height="240">
         </div>
-        <div class="col-md-8 ">
+        <div class="col-md-8">
           <h5 class="card-title">{{evento.nombre}}</h5>
           <p class="card-text">{{evento.descripcion}}</p>
           <p>Impartido por: {{evento.invitados}}</p>
@@ -55,16 +55,17 @@
             <input type="text" [(ngModel)]="evento.invitados" name="invitados" class="form-control" id="recipient-name"
               autocomplete="off">
           </div>
-        
 
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Fecha:</label>
-            <input type="text" [(ngModel)]="evento.fecha" name="fecha" class="form-control" id="recipient-name"
-              autocomplete="off"> 
-
+            <div class="input-group">
+              <input class="form-control" placeholder="dd/mm/yyyy"
+                     name="d2" #c2="ngModel" [(ngModel)]="date" ngbDatepicker #d2="ngbDatepicker">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button"></button>
+              </div>
+            </div>
           </div>
-
-          <ngb-datepicker></ngb-datepicker>
 
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Hora:</label>
