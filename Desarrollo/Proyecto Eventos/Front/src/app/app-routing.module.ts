@@ -10,6 +10,11 @@ import {MyEventsComponent} from './components/my-events/my-events.component'
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: '/eventos',
+    pathMatch: 'full'
+  },
+  {
     path: 'miseventos',
     component: MyEventsComponent
   },
@@ -23,8 +28,7 @@ const routes: Routes = [
   },
   {
     path: 'signin',
-    component: SigninComponent,
-    pathMatch: 'full'
+    component: SigninComponent
   },
   {
     path: 'signup',

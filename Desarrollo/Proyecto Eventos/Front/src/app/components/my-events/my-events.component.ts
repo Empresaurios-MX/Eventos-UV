@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 
 
+
 @Component({
   selector: 'app-my-events',
   templateUrl: './my-events.component.html',
@@ -13,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 
 
 export class MyEventsComponent implements OnInit {
+
 
   eventos: any;
   evento: Evento;
@@ -27,9 +29,10 @@ export class MyEventsComponent implements OnInit {
   literatura: boolean;
   especial: boolean;
 
-
   constructor(private eventService: EventoDataService, private modalService: NgbModal, private toastr: ToastrService) {
+                
     this.eventos = [];
+
   }
 
   notificacionExitosaCrear(){
