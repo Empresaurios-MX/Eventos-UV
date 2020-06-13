@@ -4,6 +4,7 @@ import { EventoDataService } from '../../services/evento.data.service';
 import { NgbModal, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import {NgbCalendar, NgbDateAdapter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import {NgbTimeStruct, NgbTimeAdapter} from '@ng-bootstrap/ng-bootstrap';
 
 //Servicio para recuperar la fecha usando el DatePicker
 @Injectable()
@@ -51,22 +52,46 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
   }
 }
 
+//Servicio para la hora
+const pad = (i: number): string => i < 10 ? `0${i}` : `${i}`;
+@Injectable()
+export class NgbTimeStringAdapter extends NgbTimeAdapter<string> {
+
+  fromModel(value: string| null): NgbTimeStruct | null {
+    if (!value) {
+      return null;
+    }
+    const split = value.split(':');
+    return {
+      hour: parseInt(split[0], 10),
+      minute: parseInt(split[1], 10),
+      second: parseInt(split[2], 10)
+    };
+  }
+
+  toModel(time: NgbTimeStruct | null): string | null {
+    return time != null ? `${pad(time.hour)}:${pad(time.minute)}` : null;
+  }
+}
 
 @Component({
   selector: 'app-my-events',
   templateUrl: './my-events.component.html',
   providers: [
     {provide: NgbDateAdapter, useClass: CustomAdapter},
-    {provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter}
+    {provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter},
+    {provide: NgbTimeAdapter, useClass: NgbTimeStringAdapter}
   ]
 })
 
 
 export class MyEventsComponent implements OnInit {
+  
 
-  //Modelo para el calendario
+  //Modelo para el calendario y el reloj
   model: NgbDateStruct;
   date: string;
+  hora: '13:30:00';
 
   //Eventos
   eventos: any;
@@ -133,6 +158,7 @@ export class MyEventsComponent implements OnInit {
 
   //Metodos CRUD
   createEvento(){
+    this.evento.hora = this.hora;
     this.evento.fecha = this.date;
     this.evento.tags = this.getTags();
     this.evento.realizado = false;
