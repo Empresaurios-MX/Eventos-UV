@@ -81,7 +81,8 @@ export class NgbTimeStringAdapter extends NgbTimeAdapter<string> {
     {provide: NgbDateAdapter, useClass: CustomAdapter},
     {provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter},
     {provide: NgbTimeAdapter, useClass: NgbTimeStringAdapter}
-  ]
+  ],
+  styleUrls: ['./my-events.component.css']
 })
 
 
