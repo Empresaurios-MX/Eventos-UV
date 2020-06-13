@@ -136,7 +136,7 @@ export class MyEventsComponent implements OnInit {
   notificacionExitosaCrear(){
     this.toastr.success("Evento agregado exitosamente")
   }
-
+  
   notificacionExitosaEditar(){
     this.toastr.success("Evento editado exitosamente")
   }
