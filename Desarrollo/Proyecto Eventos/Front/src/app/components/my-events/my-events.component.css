@@ -1,9 +1,3 @@
-.xlModal > .modal-dialog {
-    max-width: 1490px !important;
-    min-width: 971px !important;   
-    width: 95% !important;
-}
-
 textarea{
     height: 6em;
 }

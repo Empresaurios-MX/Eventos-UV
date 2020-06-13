@@ -154,7 +154,7 @@ export class MyEventsComponent implements OnInit {
   }
 
   mostrarModalEditar(modal){
-    this.modalService.open(modal);
+    this.modalService.open(modal , { size: 'lg'});
   }
 
   //Metodos CRUD
