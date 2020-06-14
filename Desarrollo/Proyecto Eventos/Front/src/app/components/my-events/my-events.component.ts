@@ -74,6 +74,8 @@ export class NgbTimeStringAdapter extends NgbTimeAdapter<string> {
   }
 }
 
+
+//Mis eventos
 @Component({
   selector: 'app-my-events',
   templateUrl: './my-events.component.html',
@@ -92,7 +94,7 @@ export class MyEventsComponent implements OnInit {
   //Modelo para el calendario y el reloj
   model: NgbDateStruct;
   date: string;
-  hora: '13:30:00';
+  hora: string;
 
   //Eventos
   eventos: any;

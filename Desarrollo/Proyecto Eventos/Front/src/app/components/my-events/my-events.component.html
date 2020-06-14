@@ -69,8 +69,8 @@
               <div class="form-group">
 
                 <div class="input-group">
-                  <input class="form-control" placeholder="dd/mm/yyyy" name="d2" #c2="ngModel" [(ngModel)]="date"
-                    ngbDatepicker #d2="ngbDatepicker">
+                  <input class="form-control" placeholder="dd/mm/yyyy" name="d2" #c2="ngModel"
+                    [(ngModel)]="evento.fecha" ngbDatepicker #d2="ngbDatepicker">
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button"><img
                         src="../../../assets/images/fechaIcono.png" style="width: 20px;" /></button>
@@ -79,7 +79,8 @@
               </div>
               <label for="recipient-name" class="col-form-label">Hora:</label>
               <div class="form-group">
-                <ngb-timepicker name="tp" [(ngModel)]="hora" [meridian]="true" [spinners]="true"></ngb-timepicker>
+                <ngb-timepicker name="tp" [(ngModel)]="evento.hora" [meridian]="true" [spinners]="true">
+                </ngb-timepicker>
               </div>
             </div>
 
@@ -151,6 +152,9 @@
 
                   <div class="form-group">
                     <label for="recipient-name" class="col-form-label">Foto:</label>
+                    <button type="button" class="btn" placement="right" ngbTooltip="Puedes seleccionar un archivo de tu dispositivo o ingresar un enlace de una imagen">
+                      !
+                    </button>
                     <input type="text" [(ngModel)]="evento.foto" name="foto" class="form-control" id="recipient-name"
                       autocomplete="off">
                   </div>
@@ -204,96 +208,108 @@
 
 
             <div class="col-sm-4">
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Fecha:</label>
-                <input type="text" *ngIf="evento" [(ngModel)]="evento.fecha" name="fecha" class="form-control"
-                  id="recipient-name" autocomplete="off">
+              <label for="recipient-name" class="col-form-label">Fecha:</label>
+              <div *ngIf='evento?.fecha'>
+                <div class="form-group">
+                  <div class="input-group">
+                    <input class="form-control" placeholder="dd/mm/yyyy" name="d2" #c2="ngModel"
+                      [(ngModel)]="evento.fecha" ngbDatepicker #d2="ngbDatepicker">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button"><img
+                          src="../../../assets/images/fechaIcono.png" style="width: 20px;" /></button>
+                    </div>
+                  </div>
+                </div>
               </div>
-
-              <div class="form-group">
+              <div *ngIf='evento?.fecha'>
                 <label for="recipient-name" class="col-form-label">Hora:</label>
-                <input type="text" *ngIf="evento" [(ngModel)]="evento.hora" name="hora" class="form-control"
-                  id="recipient-name" autocomplete="off">
+                <div class="form-group">
+                  <ngb-timepicker name="tp" [(ngModel)]="evento.hora" [meridian]="true" [spinners]="true">
+                  </ngb-timepicker>
+                </div>
               </div>
             </div>
 
-            
 
             <div class="col-sm-7">
-            <label class="col-form-label">Tags</label>
-            <div class="form-group">
-              <div>
-                <div class="custom-control custom-checkbox custom-control-inline">
-                  <input type="checkbox" class="custom-control-input" id="check1" [checked]="arte"
-                    (change)="check('arte', !arte)">
-                  <label class="custom-control-label" for="check1">Arte</label>
+              <label class="col-form-label">Tags</label>
+              <div class="form-group">
+                <div>
+                  <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" class="custom-control-input" id="check1" [checked]="arte"
+                      (change)="check('arte', !arte)">
+                    <label class="custom-control-label" for="check1">Arte</label>
+                  </div>
+
+                  <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" class="custom-control-input" id="check2" [checked]="musica"
+                      (change)="check('musica', !musica)">
+                    <label class="custom-control-label" for="check2">Música</label>
+                  </div>
+
+                  <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" class="custom-control-input" id="check3" [checked]="ciencia"
+                      (change)="check('ciencia', !ciencia)">
+                    <label class="custom-control-label" for="check3">Ciencia</label>
+                  </div>
+
+                  <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" class="custom-control-input" id="check6" [checked]="baile"
+                      (change)="check('baile', !baile)">
+                    <label class="custom-control-label" for="check6">Baile</label>
+                  </div>
                 </div>
 
-                <div class="custom-control custom-checkbox custom-control-inline">
-                  <input type="checkbox" class="custom-control-input" id="check2" [checked]="musica"
-                    (change)="check('musica', !musica)">
-                  <label class="custom-control-label" for="check2">Música</label>
+                <div style="height: 0.75em"></div>
+
+                <div>
+                  <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" class="custom-control-input" id="check5" [checked]="medicina"
+                      (change)="check('medicina', !medicina)">
+                    <label class="custom-control-label" for="check5">Medicina</label>
+                  </div>
+
+                  <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" class="custom-control-input" id="check4" [checked]="cultura"
+                      (change)="check('cultura', !cultura)">
+                    <label class="custom-control-label" for="check4">Cultura</label>
+                  </div>
+
+                  <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" class="custom-control-input" id="check7" [checked]="recreacion"
+                      (change)="check('recreacion', !recreacion)">
+                    <label class="custom-control-label" for="check7">Recreación</label>
+                  </div>
                 </div>
 
-                <div class="custom-control custom-checkbox custom-control-inline">
-                  <input type="checkbox" class="custom-control-input" id="check3" [checked]="ciencia"
-                    (change)="check('ciencia', !ciencia)">
-                  <label class="custom-control-label" for="check3">Ciencia</label>
+                <div style="height: 0.75em"></div>
+
+                <div>
+                  <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" class="custom-control-input" id="check8" [checked]="literatura"
+                      (change)="check('literatura', !literatura)">
+                    <label class="custom-control-label" for="check8">Literatura</label>
+                  </div>
+
+                  <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="checkbox" class="custom-control-input" id="check9" [checked]="especial"
+                      (change)="check('especial', !especial)">
+                    <label class="custom-control-label" for="check9">Especial</label>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Foto:</label>
+                    <button type="button" class="btn" placement="right" ngbTooltip="Puedes seleccionar un archivo de tu dispositivo o ingresar un enlace de una imagen">
+                      !
+                    </button>
+                    <input type="text" *ngIf="evento" [(ngModel)]="evento.foto" name="foto" class="form-control" id="recipient-name"
+                      autocomplete="off">
+                  </div>
+
+
                 </div>
-
-                <div class="custom-control custom-checkbox custom-control-inline">
-                  <input type="checkbox" class="custom-control-input" id="check6" [checked]="baile"
-                    (change)="check('baile', !baile)">
-                  <label class="custom-control-label" for="check6">Baile</label>
-                </div>
-              </div>
-
-              <div style="height: 0.75em"></div>
-
-              <div>
-                <div class="custom-control custom-checkbox custom-control-inline">
-                  <input type="checkbox" class="custom-control-input" id="check5" [checked]="medicina"
-                    (change)="check('medicina', !medicina)">
-                  <label class="custom-control-label" for="check5">Medicina</label>
-                </div>
-
-                <div class="custom-control custom-checkbox custom-control-inline">
-                  <input type="checkbox" class="custom-control-input" id="check4" [checked]="cultura"
-                    (change)="check('cultura', !cultura)">
-                  <label class="custom-control-label" for="check4">Cultura</label>
-                </div>
-
-                <div class="custom-control custom-checkbox custom-control-inline">
-                  <input type="checkbox" class="custom-control-input" id="check7" [checked]="recreacion"
-                    (change)="check('recreacion', !recreacion)">
-                  <label class="custom-control-label" for="check7">Recreación</label>
-                </div>
-              </div>
-
-              <div style="height: 0.75em"></div>
-
-              <div>
-                <div class="custom-control custom-checkbox custom-control-inline">
-                  <input type="checkbox" class="custom-control-input" id="check8" [checked]="literatura"
-                    (change)="check('literatura', !literatura)">
-                  <label class="custom-control-label" for="check8">Literatura</label>
-                </div>
-
-                <div class="custom-control custom-checkbox custom-control-inline">
-                  <input type="checkbox" class="custom-control-input" id="check9" [checked]="especial"
-                    (change)="check('especial', !especial)">
-                  <label class="custom-control-label" for="check9">Especial</label>
-                </div>
-
-                <div class="form-group">
-                  <label for="recipient-name" class="col-form-label">Foto:</label>
-                  <input type="text" *ngIf="evento" [(ngModel)]="evento.foto" name="foto" class="form-control"
-                    id="recipient-name" autocomplete="off">
-                </div>
-    
               </div>
             </div>
-          </div>
           </div>
         </form>
       </div>
