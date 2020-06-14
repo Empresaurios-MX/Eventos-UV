@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
-import {retry, catchError} from 'rxjs/operators';
+import {catchError, retry} from 'rxjs/operators';
 import {Evento} from '../models/evento';
+import {UsuarioEvento} from '../models/usuario-evento';
 
 @Injectable()
 export class EventoDataService {
@@ -24,7 +25,7 @@ export class EventoDataService {
     return this.http.get<Evento>(this.apiURL + '/eventos', this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
-  findOne(id): Observable<Evento>{
+  findOne(id): Observable<Evento> {
     return this.http.get<Evento>(this.apiURL + '/eventos/' + id, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
@@ -36,8 +37,13 @@ export class EventoDataService {
     return this.http.delete<Evento>(this.apiURL + '/eventos/' + id, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
-  update(id, evento: Evento){
-    return this.http.put<Evento>(this.apiURL + '/eventos/' + id , evento, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  update(id, evento: Evento) {
+    return this.http.put<Evento>(this.apiURL + '/eventos/' + id, evento, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
+
+  subscribe(input: UsuarioEvento): Observable<UsuarioEvento> {
+    return this.http.post<UsuarioEvento>(this.apiURL + '/usuario-evento', input, this.httpOptions)
+      .pipe(retry(1), catchError(this.handleError));
   }
 
   handleError(error) {
