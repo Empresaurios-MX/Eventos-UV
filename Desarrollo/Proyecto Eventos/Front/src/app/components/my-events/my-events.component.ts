@@ -3,8 +3,11 @@ import { Evento } from '../../models/evento'
 import { EventoDataService } from '../../services/evento.data.service';
 import { NgbModal, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import {NgbCalendar, NgbDateAdapter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
-import {NgbTimeStruct, NgbTimeAdapter} from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDateAdapter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTimeStruct, NgbTimeAdapter } from '@ng-bootstrap/ng-bootstrap';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 
 //Servicio para recuperar la fecha usando el DatePicker
 @Injectable()
@@ -16,9 +19,9 @@ export class CustomAdapter extends NgbDateAdapter<string> {
     if (value) {
       let date = value.split(this.DELIMITER);
       return {
-        day : parseInt(date[0], 10),
-        month : parseInt(date[1], 10),
-        year : parseInt(date[2], 10)
+        day: parseInt(date[0], 10),
+        month: parseInt(date[1], 10),
+        year: parseInt(date[2], 10)
       };
     }
     return null;
@@ -39,9 +42,9 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
     if (value) {
       let date = value.split(this.DELIMITER);
       return {
-        day : parseInt(date[0], 10),
-        month : parseInt(date[1], 10),
-        year : parseInt(date[2], 10)
+        day: parseInt(date[0], 10),
+        month: parseInt(date[1], 10),
+        year: parseInt(date[2], 10)
       };
     }
     return null;
@@ -57,7 +60,7 @@ const pad = (i: number): string => i < 10 ? `0${i}` : `${i}`;
 @Injectable()
 export class NgbTimeStringAdapter extends NgbTimeAdapter<string> {
 
-  fromModel(value: string| null): NgbTimeStruct | null {
+  fromModel(value: string | null): NgbTimeStruct | null {
     if (!value) {
       return null;
     }
@@ -80,21 +83,19 @@ export class NgbTimeStringAdapter extends NgbTimeAdapter<string> {
   selector: 'app-my-events',
   templateUrl: './my-events.component.html',
   providers: [
-    {provide: NgbDateAdapter, useClass: CustomAdapter},
-    {provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter},
-    {provide: NgbTimeAdapter, useClass: NgbTimeStringAdapter}
+    { provide: NgbDateAdapter, useClass: CustomAdapter },
+    { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter },
+    { provide: NgbTimeAdapter, useClass: NgbTimeStringAdapter }
   ],
   styleUrls: ['./my-events.component.css']
 })
 
 
 export class MyEventsComponent implements OnInit {
-  
+
 
   //Modelo para el calendario y el reloj
   model: NgbDateStruct;
-  date: string;
-  hora: string;
 
   //Eventos
   eventos: any;
@@ -111,14 +112,14 @@ export class MyEventsComponent implements OnInit {
   literatura: boolean;
   especial: boolean;
 
-  constructor(private ngbCalendar: NgbCalendar, private dateAdapter: NgbDateAdapter<string>, private eventService: EventoDataService, private modalService: NgbModal, private toastr: ToastrService) {
-                
+  constructor(private ngbCalendar: NgbCalendar, private dateAdapter: NgbDateAdapter<string>, private eventService: EventoDataService, private modalService: NgbModal, private toastr: ToastrService, private storage: AngularFireStorage) {
+
     this.eventos = [];
 
   }
 
   ngOnInit() {
-    this.getEventos();  
+    this.getEventos();
     this.arte = false;
     this.musica = false;
     this.ciencia = false;
@@ -130,43 +131,81 @@ export class MyEventsComponent implements OnInit {
     this.especial = false;
   }
 
+  //Firebase
+  uploadProgress: Observable<number>;
+  uploadURL: Observable<string>;
+  progresoFinalizado: boolean;
+  porcentajeSubida: number;
+
+
+  //Metodos firebase
+  upload(event) {
+    //Obtener el archivo mandado
+    const file = event.target.files[0];
+
+    //Generar un ID
+    const randomID = Math.random().toString(36).substring(2);
+    const filePath = `images/${randomID}`;
+    const fileRef = this.storage.ref(filePath);
+
+    //Subir imagen
+    const task = this.storage.upload(filePath, file);
+
+    //Cambia el porcentaje
+    task.percentageChanges().subscribe((uploadProgress) => {
+      this.porcentajeSubida = Math.round(uploadProgress);
+      if (this.porcentajeSubida == 100) {
+        this.progresoFinalizado = true;
+      }
+    });
+
+    //Obtener URl
+    task.snapshotChanges()
+    .pipe(
+      finalize(() => 
+        fileRef.getDownloadURL().subscribe( urlImage => {
+          this.uploadURL = urlImage;
+          this.evento.foto = urlImage;
+        })
+      )
+    ).subscribe();
+  }
+
   //Metodo para la fecha 
   get today() {
     return this.dateAdapter.toModel(this.ngbCalendar.getToday())!;
   }
 
   //Metodos para las notificaciones
-  notificacionExitosaCrear(){
+  notificacionExitosaCrear() {
     this.toastr.success("Evento agregado exitosamente")
   }
-  
-  notificacionExitosaEditar(){
-    this.toastr.success("Evento editado exitosamente")
+
+  notificacionExitosaEditar() {
+    this.toastr.success("Evento actualizado exitosamente")
   }
 
-  notificacionExitosaEliminar(nombre){
+  notificacionExitosaEliminar(nombre) {
     this.toastr.success("Evento " + nombre + " eliminado exitosamente")
   }
 
   //Metodos de los modales
 
-  mostrarModal(modal){
+  mostrarModal(modal) {
     this.evento = new Evento();
     this.modalService.open(modal, { size: 'lg' });
   }
 
-  mostrarModalEditar(modal){
-    this.modalService.open(modal , { size: 'lg'});
+  mostrarModalEditar(modal) {
+    this.modalService.open(modal, { size: 'lg' });
   }
 
   //Metodos CRUD
-  createEvento(){
-    this.evento.hora = this.hora;
-    this.evento.fecha = this.date;
+  createEvento() {
     this.evento.tags = this.getTags();
     this.evento.realizado = false;
     this.eventService.create(this.evento).subscribe(res => {
-      if(res){
+      if (res) {
         this.notificacionExitosaCrear();
         this.modalService.dismissAll(true);
         this.getEventos();
@@ -174,9 +213,9 @@ export class MyEventsComponent implements OnInit {
     })
   }
 
-  updateEvento(){
+  updateEvento() {
     this.eventService.update(this.evento.id, this.evento).subscribe(res => {
-      if(res){
+      if (res) {
         this.notificacionExitosaEditar();
         this.modalService.dismissAll(true);
         this.getEventos();
@@ -185,7 +224,7 @@ export class MyEventsComponent implements OnInit {
 
   }
 
-  getEvento(id){
+  getEvento(id) {
     this.eventService.findOne(id).subscribe(res => {
       this.evento = res;
     });
@@ -199,13 +238,13 @@ export class MyEventsComponent implements OnInit {
 
   deleteEvento(id) {
     this.eventService.delete(id).subscribe(res => {
-      if(res){      
+      if (res) {
         this.notificacionExitosaEliminar(this.evento.nombre);
         this.getEventos();
       }
     });
   }
-  
+
   //Metodo para obtener los tags
   getTags(): string[] {
     const intereses = [];

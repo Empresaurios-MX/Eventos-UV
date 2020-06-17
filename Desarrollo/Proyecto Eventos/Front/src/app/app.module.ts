@@ -18,6 +18,11 @@ import {HttpClientModule} from '@angular/common/http';
 import {MyEventsComponent} from './components/my-events/my-events.component';
 import {EventoDataService} from './services/evento.data.service';
 
+import {AngularFireModule} from '@angular/fire'
+import {AngularFireStorageModule} from '@angular/fire/storage'
+
+import {environment} from '../environments/environment'
+
 
 @NgModule({
   declarations: [
@@ -38,7 +43,9 @@ import {EventoDataService} from './services/evento.data.service';
 	  ToastrModule.forRoot(({
       positionClass: 'toast-bottom-right'
     }),),
-	  NgbModule
+    NgbModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule
   ],
   providers: [UsuarioDataService, EventoDataService],
   bootstrap: [AppComponent]
