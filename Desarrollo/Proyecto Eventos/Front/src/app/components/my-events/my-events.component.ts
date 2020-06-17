@@ -164,7 +164,6 @@ export class MyEventsComponent implements OnInit {
     .pipe(
       finalize(() => 
         fileRef.getDownloadURL().subscribe( urlImage => {
-          this.uploadURL = urlImage;
           this.evento.foto = urlImage;
         })
       )
