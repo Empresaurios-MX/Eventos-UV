@@ -220,7 +220,7 @@
                 <div class="form-group">
                   <div class="input-group">
                     <input class="form-control" placeholder="dd/mm/yyyy" name="d2" #c2="ngModel"
-                      [(ngModel)]="evento.fecha" ngbDatepicker #d2="ngbDatepicker">
+                      [(ngModel)]="evento.fecha" ngbDatepicker #d2="ngbDatepicker" autocomplete="off">
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button"><img
                           src="../../../assets/images/fechaIcono.png" style="width: 20px;" /></button>
@@ -310,7 +310,7 @@
                       ngbTooltip="Puedes seleccionar un archivo de tu dispositivo o ingresar un enlace de una imagen">
                       !
                     </button>
-                    <input type="text" [(ngModel)]="evento.foto" name="foto" class="form-control" id="recipient-name"
+                    <input type="text" *ngIf="evento" [(ngModel)]="evento.foto" name="foto" class="form-control" id="recipient-name"
                       autocomplete="off">
 
                   </div>

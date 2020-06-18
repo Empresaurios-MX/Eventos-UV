@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {Login} from '../../models/login';
-import {UsuarioDataService} from '../../services/usuario.data.service';
-import {Usuario} from '../../models/usuario';
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Login } from '../../models/login';
+import { UsuarioDataService } from '../../services/usuario.data.service';
+import { Usuario } from '../../models/usuario';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -26,6 +26,9 @@ export class SigninComponent implements OnInit {
       this.service.login(this.login).subscribe(response => {
         this.usuario = response;
         this.router.navigate(['/eventos']);
+
+        localStorage.setItem('usuario', JSON.stringify(this.usuario));
+        
       });
       console.log('Logeado como estudiante');
     } else if (this.login.rol === 'administrador') {

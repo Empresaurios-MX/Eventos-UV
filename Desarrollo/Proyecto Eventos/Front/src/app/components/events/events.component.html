@@ -12,7 +12,9 @@
           <p>Fecha: {{evento.fecha}}</p>
           <p>Hora: {{evento.hora}}</p>
           <p>Tags: {{evento.tags}}</p>
-          <a href="#" class="btn btn-primary">Voy a asistir</a>
+          <div class="row">
+            <button class="btn btn-primary  mx-3" (click)="asistirEvento(evento.id)">Voy a asistir</button>
+          </div>
         </div>
       </div>
     </div>

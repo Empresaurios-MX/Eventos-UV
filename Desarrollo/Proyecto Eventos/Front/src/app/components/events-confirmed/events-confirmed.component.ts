@@ -1,4 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Evento } from 'src/app/models/evento';
+import { EventoDataService } from '../../services/evento.data.service';
+import { Usuario } from '../../models/usuario';
 
 @Component({
   selector: 'app-events-confirmed',
@@ -7,7 +10,15 @@ import {Component, OnInit} from '@angular/core';
 })
 export class EventsConfirmedComponent implements OnInit {
 
-  constructor() {
+  evento: Evento;
+  eventos: any;
+  usuario: Usuario;
+
+  constructor(private eventService: EventoDataService) {
+    this.eventos = [];
+    var usuarioGuardado = localStorage.getItem('usuario');
+    this.usuario = JSON.parse(usuarioGuardado);
+    this.eventos = this.usuario.eventos;
   }
 
   ngOnInit(): void {
