@@ -7,6 +7,7 @@ import {EventsConfirmedComponent} from './components/events-confirmed/events-con
 import {SignupComponent} from './components/signup/signup.component';
 import {SigninComponent} from './components/signin/signin.component';
 import {MyEventsComponent} from './components/my-events/my-events.component'
+import {ProfileComponent} from './components/profile/profile.component'
 
 const routes: Routes = [
   {
@@ -33,6 +34,10 @@ const routes: Routes = [
   {
     path: 'signup',
     component: SignupComponent
+  },
+  {
+    path: 'perfil',
+    component: ProfileComponent
   }
 ];
 

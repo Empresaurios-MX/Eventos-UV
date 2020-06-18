@@ -21,7 +21,8 @@ import {EventoDataService} from './services/evento.data.service';
 import {AngularFireModule} from '@angular/fire'
 import {AngularFireStorageModule} from '@angular/fire/storage'
 
-import {environment} from '../environments/environment'
+import {environment} from '../environments/environment';
+import { ProfileComponent } from './components/profile/profile.component'
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import {environment} from '../environments/environment'
     EventsComponent,
     EventsConfirmedComponent,
     MyEventsComponent,
-    NavbarComponent
+    NavbarComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

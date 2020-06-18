@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark colorNavBar">
  
 
-  <a class="navbar-brand" href="#">Eventos UV</a>
+  <a class="navbar-brand" href="">Eventos UV</a>
   <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
     &#9776;
   </button>
@@ -29,6 +29,11 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/signin" routerLinkActive="active"
             (click)="isMenuCollapsed = true">Acceder</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/perfil" routerLinkActive="active"
+            (click)="isMenuCollapsed = true">Mi perfil</a>
         </li>
       </ul>
     </div>
