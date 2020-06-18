@@ -23,7 +23,7 @@ const routes: Routes = [
     component: EventsComponent
   },
   {
-    path: 'eventos/confirmados',
+    path: 'confirmados',
     component: EventsConfirmedComponent
   },
   {
