@@ -25,6 +25,7 @@
   "scripts": {
     "run": "swagger project start",
     "start": "node app.js",
+    "edit": "swagger project edit",
     "test": "swagger project test"
   }
 }
