@@ -233,17 +233,15 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-
-  /usuario-evento/{id}:
-    x-swagger-router-controller: usuario-evento.controller
-    
+            
     delete:
       operationId: deleteUsuarioEvento
       parameters:
-        - name: id
-          in: path 
+        - name: usuario-evento
+          in: body
           required: true
-          type: string
+          schema:
+            $ref: "#/definitions/Usuario-Evento"
       responses:
         "200":
           description: Success

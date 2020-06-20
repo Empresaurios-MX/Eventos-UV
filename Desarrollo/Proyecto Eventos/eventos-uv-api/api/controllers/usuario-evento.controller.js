@@ -16,13 +16,19 @@ function postUsuarioEvento(req, res) {
 function deleteUsuarioEvento(req, res) {
     headers.setHeaders(res);
 
-    const idIn = req.swagger.params.id.value;
+    const input = req.body;
+    const options = {
+        where: {
+            usuarioId: input.usuarioId,
+            eventoId: input.eventoId
+        }
+    };
 
-    usuario_evento.findByPk(idIn).then(result => {
-        if (!result) {
+    usuario_evento.findOne(options).then(evento_usuario => {
+        if (!evento_usuario) {
             return res.status(200).send({success: 0, description: "No encontrado!"});
         } else {
-            return result.destroy()
+            return evento_usuario.destroy()
                 .then(() => res.status(200).send({success: 1, description: "Eliminado!"}))
                 .catch(() => res.status(403).send({success: 0, description: "Error!"}))
         }
