@@ -8,7 +8,7 @@ import {ToastrModule} from 'ngx-toastr';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
+import {NavbarComponent} from './components/navbar/navbar.component';
 import {SignupComponent} from './components/signup/signup.component';
 import {SigninComponent} from './components/signin/signin.component';
 import {EventsComponent} from './components/events/events.component';
@@ -22,7 +22,7 @@ import {AngularFireModule} from '@angular/fire'
 import {AngularFireStorageModule} from '@angular/fire/storage'
 
 import {environment} from '../environments/environment';
-import { ProfileComponent } from './components/profile/profile.component'
+import {ProfileComponent} from './components/profile/profile.component'
 
 
 @NgModule({

@@ -17,7 +17,7 @@ const routes: Routes = [
   },
   {
     path: 'miseventos',
-    component: MyEventsComponent
+    component: MyEventsComponent,
   },
   {
     path: 'eventos',

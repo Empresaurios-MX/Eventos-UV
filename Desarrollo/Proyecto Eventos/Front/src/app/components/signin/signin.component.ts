@@ -25,22 +25,18 @@ export class SigninComponent implements OnInit {
     if (this.login.rol === 'estudiante') {
       this.service.login(this.login).subscribe(response => {
         this.usuario = response;
-        this.router.navigate(['/eventos']);
-
         localStorage.setItem('usuario', JSON.stringify(this.usuario));
-        
+        this.router.navigate(['/eventos']);
       });
-      console.log('Logeado como estudiante');
+      
     } else if (this.login.rol === 'administrador') {
       this.service.login(this.login).subscribe(response => {
         this.usuario = response;
+        localStorage.setItem('usuario', JSON.stringify(this.usuario));
         this.router.navigate(['/miseventos']);
       });
-      console.log('Logeado como administrador');
     } else {
       window.alert('Debe selecionar un rol');
     }
   }
-
-
 }
