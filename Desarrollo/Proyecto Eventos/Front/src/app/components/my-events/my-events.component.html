@@ -4,6 +4,10 @@
     <button class="btn btn-primary" (click)="mostrarModal(nombreModalCrear)">
       Crear evento
     </button>
+    <button class="btn btn-primary" (click)="enviarNotificacion()">
+      Enviar notificacion
+    </button>
+    {{ message | async | json }}
   </div>
 
   <!-- Feed de eventos -->

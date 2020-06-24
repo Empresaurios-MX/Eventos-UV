@@ -8,6 +8,7 @@ import { NgbTimeStruct, NgbTimeAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { NotificationsService } from '../../services/notifications.service';
 
 //Servicio para recuperar la fecha usando el DatePicker
 @Injectable()
@@ -112,7 +113,7 @@ export class MyEventsComponent implements OnInit {
   literatura: boolean;
   especial: boolean;
 
-  constructor(private ngbCalendar: NgbCalendar, private dateAdapter: NgbDateAdapter<string>, private eventService: EventoDataService, private modalService: NgbModal, private toastr: ToastrService, private storage: AngularFireStorage) {
+  constructor(private ngbCalendar: NgbCalendar, private dateAdapter: NgbDateAdapter<string>, private eventService: EventoDataService, private modalService: NgbModal, private toastr: ToastrService, private storage: AngularFireStorage, private notificationService: NotificationsService) {
 
     this.eventos = [];
 
@@ -136,6 +137,7 @@ export class MyEventsComponent implements OnInit {
   uploadURL: Observable<string>;
   progresoFinalizado: boolean;
   porcentajeSubida: number;
+  message;
 
 
   //Metodos firebase
@@ -186,6 +188,13 @@ export class MyEventsComponent implements OnInit {
 
   notificacionExitosaEliminar(nombre) {
     this.toastr.success("Evento " + nombre + " eliminado exitosamente")
+  }
+
+  enviarNotificacion(){
+    const userId = 'user001';
+    this.notificationService.requestPermission(userId);
+    this.message = this.notificationService.currentMessage;
+    this.notificationService.receiveMessage();
   }
 
   //Metodos de los modales

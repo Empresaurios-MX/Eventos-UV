@@ -5,13 +5,13 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyApn_umyQBvDv7tRh118IjI43GCQ5hPka8",
-    authDomain: "eventos-uv-imagenes.firebaseapp.com",
-    databaseURL: "https://eventos-uv-imagenes.firebaseio.com",
-    projectId: "eventos-uv-imagenes",
-    storageBucket: "eventos-uv-imagenes.appspot.com",
-    messagingSenderId: "428945584128",
-    appId: "1:428945584128:web:3fa2dce99bc3b8befa68e5"
+    apiKey: "AIzaSyA6DGGV2Ec_edCUfzLia81N2Jd66gz6UtA",
+    authDomain: "eventos-uv-dev.firebaseapp.com",
+    databaseURL: "https://eventos-uv-dev.firebaseio.com",
+    projectId: "eventos-uv-dev",
+    storageBucket: "eventos-uv-dev.appspot.com",
+    messagingSenderId: "44971202265",
+    appId: "1:44971202265:web:f2cbdde638c02d2fd350c8"
   }
 };
 

@@ -18,11 +18,15 @@ import {HttpClientModule} from '@angular/common/http';
 import {MyEventsComponent} from './components/my-events/my-events.component';
 import {EventoDataService} from './services/evento.data.service';
 
-import {AngularFireModule} from '@angular/fire'
-import {AngularFireStorageModule} from '@angular/fire/storage'
+import {AngularFireModule} from '@angular/fire';
+import {AngularFireStorageModule} from '@angular/fire/storage';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+
 
 import {environment} from '../environments/environment';
-import {ProfileComponent} from './components/profile/profile.component'
+import {ProfileComponent} from './components/profile/profile.component';
+import {AsyncPipe} from '../../node_modules/@angular/common';
+import {NotificationsService} from './services/notifications.service'
 
 
 @NgModule({
@@ -47,9 +51,10 @@ import {ProfileComponent} from './components/profile/profile.component'
     }),),
     NgbModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    AngularFireMessagingModule
   ],
-  providers: [UsuarioDataService, EventoDataService],
+  providers: [UsuarioDataService, EventoDataService, AsyncPipe, NotificationsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
