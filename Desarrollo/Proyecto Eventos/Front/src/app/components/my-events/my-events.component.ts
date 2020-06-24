@@ -9,74 +9,9 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { NotificationsService } from '../../services/notifications.service';
-
-//Servicio para recuperar la fecha usando el DatePicker
-@Injectable()
-export class CustomAdapter extends NgbDateAdapter<string> {
-
-  readonly DELIMITER = '-';
-
-  fromModel(value: string | null): NgbDateStruct | null {
-    if (value) {
-      let date = value.split(this.DELIMITER);
-      return {
-        day: parseInt(date[0], 10),
-        month: parseInt(date[1], 10),
-        year: parseInt(date[2], 10)
-      };
-    }
-    return null;
-  }
-
-  toModel(date: NgbDateStruct | null): string | null {
-    return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : null;
-  }
-}
-
-//Servicio para Parsear la fecha
-@Injectable()
-export class CustomDateParserFormatter extends NgbDateParserFormatter {
-
-  readonly DELIMITER = '/';
-
-  parse(value: string): NgbDateStruct | null {
-    if (value) {
-      let date = value.split(this.DELIMITER);
-      return {
-        day: parseInt(date[0], 10),
-        month: parseInt(date[1], 10),
-        year: parseInt(date[2], 10)
-      };
-    }
-    return null;
-  }
-
-  format(date: NgbDateStruct | null): string {
-    return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : '';
-  }
-}
-
-//Servicio para la hora
-const pad = (i: number): string => i < 10 ? `0${i}` : `${i}`;
-@Injectable()
-export class NgbTimeStringAdapter extends NgbTimeAdapter<string> {
-
-  fromModel(value: string | null): NgbTimeStruct | null {
-    if (!value) {
-      return null;
-    }
-    const split = value.split(':');
-    return {
-      hour: parseInt(split[0], 10),
-      minute: parseInt(split[1], 10),
-      second: parseInt(split[2], 10)
-    };
-  }
-
-  toModel(time: NgbTimeStruct | null): string | null {
-    return time != null ? `${pad(time.hour)}:${pad(time.minute)}` : null;
-  }
-}
+import { DatePickerService } from '../../services/date.picker.service';
+import { DateFormatterService } from '../../services/date.formatter.service';
+import { TimeAdapterService } from '../../services/time.adapter.service';
 
 
 //Mis eventos
@@ -84,9 +19,9 @@ export class NgbTimeStringAdapter extends NgbTimeAdapter<string> {
   selector: 'app-my-events',
   templateUrl: './my-events.component.html',
   providers: [
-    { provide: NgbDateAdapter, useClass: CustomAdapter },
-    { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter },
-    { provide: NgbTimeAdapter, useClass: NgbTimeStringAdapter }
+    { provide: NgbDateAdapter, useClass: DatePickerService },
+    { provide: NgbDateParserFormatter, useClass: DateFormatterService },
+    { provide: NgbTimeAdapter, useClass: TimeAdapterService }
   ],
   styleUrls: ['./my-events.component.css']
 })
@@ -113,7 +48,13 @@ export class MyEventsComponent implements OnInit {
   literatura: boolean;
   especial: boolean;
 
-  constructor(private ngbCalendar: NgbCalendar, private dateAdapter: NgbDateAdapter<string>, private eventService: EventoDataService, private modalService: NgbModal, private toastr: ToastrService, private storage: AngularFireStorage, private notificationService: NotificationsService) {
+  constructor(private ngbCalendar: NgbCalendar,
+    private dateAdapter: NgbDateAdapter<string>,
+    private eventService: EventoDataService,
+    private modalService: NgbModal,
+    private toastr: ToastrService,
+    private storage: AngularFireStorage,
+    private notificationService: NotificationsService) {
 
     this.eventos = [];
 
@@ -140,7 +81,7 @@ export class MyEventsComponent implements OnInit {
   message;
 
 
-  //Metodos firebase
+  //Metodos firebase para subir la imagen 
   upload(event) {
     //Obtener el archivo mandado
     const file = event.target.files[0];
@@ -163,13 +104,13 @@ export class MyEventsComponent implements OnInit {
 
     //Obtener URl
     task.snapshotChanges()
-    .pipe(
-      finalize(() => 
-        fileRef.getDownloadURL().subscribe( urlImage => {
-          this.evento.foto = urlImage;
-        })
-      )
-    ).subscribe();
+      .pipe(
+        finalize(() =>
+          fileRef.getDownloadURL().subscribe(urlImage => {
+            this.evento.foto = urlImage;
+          })
+        )
+      ).subscribe();
   }
 
   //Metodo para la fecha 
@@ -177,7 +118,7 @@ export class MyEventsComponent implements OnInit {
     return this.dateAdapter.toModel(this.ngbCalendar.getToday())!;
   }
 
-  //Metodos para las notificaciones
+  //Metodos para las notificaciones Toast
   notificacionExitosaCrear() {
     this.toastr.success("Evento agregado exitosamente")
   }
@@ -190,7 +131,8 @@ export class MyEventsComponent implements OnInit {
     this.toastr.success("Evento " + nombre + " eliminado exitosamente")
   }
 
-  enviarNotificacion(){
+  //Metodo para enviar notificacion de Firebase
+  enviarNotificacion() {
     const userId = 'user001';
     this.notificationService.requestPermission(userId);
     this.message = this.notificationService.currentMessage;
@@ -208,7 +150,7 @@ export class MyEventsComponent implements OnInit {
     this.modalService.open(modal, { size: 'lg' });
   }
 
-  //Metodos CRUD
+  //Metodos CRUD del evento
   createEvento() {
     this.evento.tags = this.getTags();
     this.evento.realizado = false;
