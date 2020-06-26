@@ -143,6 +143,7 @@ export class MyEventsComponent implements OnInit {
 
   mostrarModal(modal) {
     this.evento = new Evento();
+    this.falseTags();
     this.modalService.open(modal, { size: 'lg' });
   }
 
@@ -159,6 +160,7 @@ export class MyEventsComponent implements OnInit {
         this.notificacionExitosaCrear();
         this.modalService.dismissAll(true);
         this.getEventos();
+        this.enviarNotificacion();
       }
     })
   }
@@ -193,6 +195,19 @@ export class MyEventsComponent implements OnInit {
         this.getEventos();
       }
     });
+  }
+
+  //Metodo para poner en false los tags
+  falseTags(){
+    this.arte = false;
+    this.musica = false;
+    this.ciencia = false;
+    this.baile = false;
+    this.medicina = false;
+    this.cultura = false;
+    this.recreacion = false;
+    this.literatura = false;
+    this.especial = false;
   }
 
   //Metodo para obtener los tags
