@@ -1,4 +1,5 @@
 const {usuario} = require('../models');
+const {fromAES256} = require("../helpers/security");
 const headers = require("../helpers/headers");
 
 exports.login = function (req, res) {
@@ -20,10 +21,9 @@ exports.login = function (req, res) {
             return res.status(404).send({message: 'Usuario no encontrado'})
         }
 
-        if (result.password === authIn.password) {
+        if (fromAES256(result.password) === authIn.password) {
             return res.status(200).send(result)
-        }
-        else {
+        } else {
             return res.status(404).send({message: "Password incorrecto"})
         }
     }).catch(error => res.status(400).send({message: "Error: " + error}));

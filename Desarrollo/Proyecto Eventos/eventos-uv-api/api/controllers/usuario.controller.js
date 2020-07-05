@@ -1,4 +1,5 @@
 const {usuario} = require("../models");
+const {toAES256} = require("../helpers/security");
 const headers = require("../helpers/headers");
 
 const MODULE_NAME = '[Usuario Controller]';
@@ -17,6 +18,8 @@ function postUsuario(req, res) {
     if (usuarioIn.rol !== 'administrador' && usuarioIn.rol !== 'estudiante') {
         return res.status(422).send({message: 'El rol debe ser "estudiante" o "administrador"'})
     }
+
+    usuarioIn.password = toAES256(usuarioIn.password);
 
     usuario.findOne({where: {email: usuarioIn.email}})
         .then(value => {
