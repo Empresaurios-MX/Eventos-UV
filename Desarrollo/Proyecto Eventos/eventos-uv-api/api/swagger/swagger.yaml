@@ -83,6 +83,24 @@ paths:
 
   /usuarios/{id}:
     x-swagger-router-controller: usuario.controller
+    
+    
+    get:
+      operationId: getUsuarioById
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true
+      responses:
+        "200":
+          description: success
+          schema:
+            $ref: "#/definitions/UsuarioResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
 
     put:
       operationId: putUsuario

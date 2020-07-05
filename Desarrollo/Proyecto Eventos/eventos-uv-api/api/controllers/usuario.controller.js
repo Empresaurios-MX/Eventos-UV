@@ -10,6 +10,21 @@ function getUsuarios(req, res) {
         .catch(error => res.status(500).send(error));
 }
 
+function getUsuarioById(req, res) {
+    headers.setHeaders(res);
+
+    const idIn = req.swagger.params.id.value;
+
+    usuario.findByPk(idIn, {include: ['eventos']})
+        .then(usuario => {
+
+            res.status(200).send(
+                usuario
+            );
+        })
+        .catch(error => res.status(403).send(error));
+}
+
 function postUsuario(req, res) {
     headers.setHeaders(res);
 
@@ -74,6 +89,7 @@ function deleteUsuario(req, res) {
 
 module.exports = {
     getUsuarios,
+    getUsuarioById,
     postUsuario,
     putUsuario,
     deleteUsuario,
