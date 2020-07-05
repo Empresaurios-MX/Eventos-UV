@@ -9,22 +9,22 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       password: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(100)
       },
       nombre: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(50)
       },
       apellidos: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(50)
       },
       intereses: {
         type: Sequelize.ARRAY(Sequelize.STRING)
       },
       email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(100)
       },
       rol: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(20)
       },
       createdAt: {
         allowNull: false,

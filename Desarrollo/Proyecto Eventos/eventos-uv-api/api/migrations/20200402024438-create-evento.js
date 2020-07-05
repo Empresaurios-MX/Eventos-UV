@@ -9,7 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       nombre: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(100)
       },
       descripcion: {
         type: Sequelize.STRING
@@ -18,16 +18,16 @@ module.exports = {
         type: Sequelize.STRING
       },
       fecha: {
-        type: Sequelize.STRING
+        type: Sequelize.DATE
       },
       hora: {
-        type: Sequelize.STRING
+        type: Sequelize.TIME
       },
       tags: {
         type: Sequelize.ARRAY(Sequelize.STRING)
       },
       foto: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       realizado: {
         type: Sequelize.BOOLEAN
