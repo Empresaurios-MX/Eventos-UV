@@ -3,7 +3,6 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
 import {Evento} from '../models/evento';
-import {UsuarioEvento} from '../models/usuario-evento';
 
 @Injectable()
 export class EventoDataService {
@@ -33,21 +32,16 @@ export class EventoDataService {
     return this.http.post<Evento>(this.apiURL + '/eventos', evento, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
-  delete(id){
+  delete(id) {
     return this.http.delete(this.apiURL + '/eventos/' + id, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
-  update(id, evento: Evento) {
+  update(id, evento: Evento): Observable<Evento> {
     return this.http.put<Evento>(this.apiURL + '/eventos/' + id, evento, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
-  subscribe(input: UsuarioEvento): Observable<UsuarioEvento> {
-    return this.http.post<UsuarioEvento>(this.apiURL + '/usuario-evento', input, this.httpOptions)
-      .pipe(retry(1), catchError(this.handleError));
-  }
-
   handleError(error) {
-    let errorMessage = '';
+    let errorMessage;
 
     if (error.error instanceof ErrorEvent) {
       // Get client-side error

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
-import {retry, catchError} from 'rxjs/operators';
+import {catchError, retry} from 'rxjs/operators';
 import {Login} from '../models/login';
 import {Usuario} from '../models/usuario';
 
@@ -29,8 +29,16 @@ export class UsuarioDataService {
     return this.http.post<Usuario>(this.apiURL + '/usuarios', usuario, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
+  findOne(id): Observable<Usuario> {
+    return this.http.get<Usuario>(this.apiURL + '/usuarios/' + id, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
+
+  update(id, usuario: Usuario): Observable<Usuario> {
+    return this.http.put<Usuario>(this.apiURL + '/usuarios/' + id, usuario, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+  }
+
   handleError(error) {
-    let errorMessage = '';
+    let errorMessage;
 
     if (error.error instanceof ErrorEvent) {
       // Get client-side error

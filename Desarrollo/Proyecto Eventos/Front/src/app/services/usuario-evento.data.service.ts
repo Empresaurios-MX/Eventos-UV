@@ -33,7 +33,7 @@ export class UsuarioEventoDataDataService {
   }
 
   handleError(error) {
-    let errorMessage = '';
+    let errorMessage;
 
     if (error.error instanceof ErrorEvent) {
       // Get client-side error
