@@ -1,4 +1,5 @@
 const {evento} = require("../models");
+const {usuario_evento} = require("../models");
 const headers = require("../helpers/headers");
 
 const MODULE_NAME = '[Evento Controller]';
@@ -14,7 +15,7 @@ function getEventoById(req, res) {
 
     const idIn = req.swagger.params.id.value;
 
-    evento.findByPk(idIn, {include: ['participantes']})
+    evento.findByPk(idIn)
         .then(user => res.status(200).send(user))
         .catch(error => res.status(403).send(error));
 }
@@ -55,9 +56,11 @@ function deleteEvento(req, res) {
         if (!evento) {
             return res.status(200).send({success: 0, description: "No encontrado!"});
         } else {
-            return evento.destroy()
-                .then(() => res.status(200).send({success: 1, description: "Eliminado!"}))
-                .catch(() => res.status(403).send({success: 0, description: "Error!"}))
+            usuario_evento.destroy({where: {eventoId: idIn}}).then(() => {
+                return evento.destroy()
+                    .then(() => res.status(200).send({success: 1, description: "Eliminado!"}))
+                    .catch(() => res.status(403).send({success: 0, description: "Error!"}))
+            });
         }
     }).catch(error => console.log(error));
 }
