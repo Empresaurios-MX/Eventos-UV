@@ -15,8 +15,33 @@ function getEventoById(req, res) {
 
     const idIn = req.swagger.params.id.value;
 
-    evento.findByPk(idIn)
-        .then(user => res.status(200).send(user))
+    evento.findByPk(idIn, {include: ['participantes']})
+        .then(evento => {
+
+            let part = [];
+
+            evento.participantes.forEach(participante => part.push({
+                nombre: participante.nombre,
+                apellidos: participante.apellidos
+            }));
+
+            res.status(200).send(
+                {
+                    id: evento.id,
+                    nombre: evento.nombre,
+                    descripcion: evento.descripcion,
+                    invitados: evento.invitados,
+                    participantes: part,
+                    fecha: evento.fecha,
+                    hora: evento.hora,
+                    tags: evento.tags,
+                    foto: evento.foto,
+                    realizado: evento.realizado,
+                    createdAt: evento.createdAt,
+                    updatedAt: evento.updatedAt
+                }
+            );
+        })
         .catch(error => res.status(403).send(error));
 }
 
