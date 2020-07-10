@@ -12,6 +12,7 @@ import { NotificationsService } from '../../services/notifications.service';
 import { DatePickerService } from '../../services/date.picker.service';
 import { DateFormatterService } from '../../services/date.formatter.service';
 import { TimeAdapterService } from '../../services/time.adapter.service';
+import Swal from 'sweetalert2';
 
 
 //Mis eventos
@@ -62,15 +63,7 @@ export class MyEventsComponent implements OnInit {
 
   ngOnInit() {
     this.getEventos();
-    this.arte = false;
-    this.musica = false;
-    this.ciencia = false;
-    this.baile = false;
-    this.medicina = false;
-    this.cultura = false;
-    this.recreacion = false;
-    this.literatura = false;
-    this.especial = false;
+    this.falseTags();
   }
 
   //Firebase
@@ -120,15 +113,11 @@ export class MyEventsComponent implements OnInit {
 
   //Metodos para las notificaciones Toast
   notificacionExitosaCrear() {
-    this.toastr.success("Evento agregado exitosamente")
+    this.toastr.success("Evento agregado exitosamente");
   }
 
   notificacionExitosaEditar() {
-    this.toastr.success("Evento actualizado exitosamente")
-  }
-
-  notificacionExitosaEliminar(nombre) {
-    this.toastr.success("Evento " + nombre + " eliminado exitosamente")
+    this.toastr.success("Evento actualizado exitosamente");
   }
 
   //Metodo para enviar notificacion de Firebase
@@ -140,7 +129,6 @@ export class MyEventsComponent implements OnInit {
   }
 
   //Metodos de los modales
-
   mostrarModal(modal) {
     this.evento = new Evento();
     this.falseTags();
@@ -148,6 +136,7 @@ export class MyEventsComponent implements OnInit {
   }
 
   mostrarModalEditar(modal) {
+    this.getTags();
     this.modalService.open(modal, { size: 'lg' });
   }
 
@@ -161,7 +150,7 @@ export class MyEventsComponent implements OnInit {
         this.modalService.dismissAll(true);
         this.getEventos();
         this.enviarNotificacion();
-      }
+      } 
     })
   }
 
@@ -179,6 +168,8 @@ export class MyEventsComponent implements OnInit {
   getEvento(id) {
     this.eventService.findOne(id).subscribe(res => {
       this.evento = res;
+      console.log(this.evento.fecha);
+      console.log(this.evento.hora);
     });
   }
 
@@ -189,16 +180,28 @@ export class MyEventsComponent implements OnInit {
   }
 
   deleteEvento(id) {
-    this.eventService.delete(id).subscribe(res => {
-      if (res) {
-        this.notificacionExitosaEliminar(this.evento.nombre);
-        this.getEventos();
+    Swal.fire({
+      title: '¿Seguro que desea eliminar el evento?',
+      text: "¡No podra deshacer esta acción!",
+      icon: 'warning',
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Si, eliminarlo'
+    }).then((res) => {
+      if (res.value) {
+        this.eventService.delete(id).subscribe(res => {
+          Swal.fire(
+            'Eliminado',
+            'El evento ha sido eliminado exitosamente',
+            'success'
+          )
+          this.getEventos();
+        })
       }
-    });
+    })
   }
 
   //Metodo para poner en false los tags
-  falseTags(){
+  falseTags() {
     this.arte = false;
     this.musica = false;
     this.ciencia = false;
@@ -241,7 +244,6 @@ export class MyEventsComponent implements OnInit {
     if (this.especial) {
       intereses.push('Especial');
     }
-
     return intereses;
   }
 

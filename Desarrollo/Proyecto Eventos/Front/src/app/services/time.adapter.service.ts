@@ -22,7 +22,7 @@ export class TimeAdapterService extends NgbTimeAdapter<string> {
   }
 
   toModel(time: NgbTimeStruct | null): string | null {
-    return time != null ? `${pad(time.hour)}:${pad(time.minute)}` : null;
+    return time != null ? `${pad(time.hour)}:${pad(time.minute)}:${pad(time.second)}` : null;
   }
 }
 
