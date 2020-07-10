@@ -7,7 +7,7 @@ import {Evento} from '../models/evento';
 @Injectable()
 export class EventoDataService {
 
-  apiURL = 'https://eventos-uv-api.herokuapp.com';
+  apiURL = 'http://localhost:10010';
 
   constructor(private http: HttpClient) {
   }
@@ -29,6 +29,9 @@ export class EventoDataService {
   }
 
   create(evento: Evento): Observable<Evento> {
+
+    evento.fecha = evento.fecha + 'T' + evento.hora + 'Z';
+
     return this.http.post<Evento>(this.apiURL + '/eventos', evento, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
