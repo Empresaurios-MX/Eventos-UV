@@ -173,8 +173,7 @@ export class MyEventsComponent implements OnInit {
   getEvento(id) {
     this.eventService.findOne(id).subscribe(res => {
       this.evento = res;
-      console.log(this.evento.fecha);
-      console.log(this.evento.hora);
+      this.evento.fecha = DateFormatterService(this.evento.fecha);
     });
   }
 

@@ -16,7 +16,7 @@
             <h5 class="card-title">{{evento.nombre}}</h5>
             <p class="card-text">{{evento.descripcion}}</p>
             <p>Impartido por: {{evento.invitados}}</p>
-            <p>Fecha: {{evento.fecha}}</p>
+            <p>Fecha: {{evento.fecha | date : "dd/MM/yyyy"}}</p>
             <p>Hora: {{evento.hora}}</p>
             <p>Tags: {{evento.tags}}</p>
             <div class="row">
@@ -42,7 +42,7 @@
             <h5 class="card-title">{{evento.nombre}}</h5>
             <p class="card-text">{{evento.descripcion}}</p>
             <p>Impartido por: {{evento.invitados}}</p>
-            <p>Fecha: {{evento.fecha}}</p>
+            <p>Fecha: {{evento.fecha | date : "dd/MM/yyyy"}}</p>
             <p>Hora: {{evento.hora}}</p>
             <p>Tags: {{evento.tags}}</p>
             <div class="row">
