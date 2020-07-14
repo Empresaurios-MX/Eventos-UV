@@ -30,8 +30,13 @@ export class EventoDataService {
   }
 
   create(evento: Evento): Observable<Evento> {
+    const fechaFragments = evento.fecha.split('-');
+    const horaFragments = evento.hora.split(':');
+    const realDate = new Date(fechaFragments[2] + '-' + fechaFragments[1] + '-' + fechaFragments[0]);
 
-    evento.fecha = evento.fecha + 'T' + evento.hora + 'Z';
+    realDate.setHours(parseInt(horaFragments[0], 0), parseInt(horaFragments[1], 0), parseInt(horaFragments[2], 0));
+
+    evento.fecha = realDate.toISOString();
 
     return this.http.post<Evento>(this.apiURL + '/eventos', evento, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
@@ -55,7 +60,7 @@ export class EventoDataService {
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
 
-    Swal.fire('Error','Algo ha salido mal, por favor intentalo más tarde','error');
+    Swal.fire('Error', 'Algo ha salido mal, por favor intentalo más tarde', 'error');
 
     return throwError(errorMessage);
   }

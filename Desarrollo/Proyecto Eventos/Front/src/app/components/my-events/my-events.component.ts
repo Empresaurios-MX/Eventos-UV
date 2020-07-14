@@ -79,7 +79,7 @@ export class MyEventsComponent implements OnInit {
   message;
 
 
-  //Metodos firebase para subir la imagen 
+  //Metodos firebase para subir la imagen
   upload(event) {
     //Obtener el archivo mandado
     const file = event.target.files[0];
@@ -111,7 +111,7 @@ export class MyEventsComponent implements OnInit {
       ).subscribe();
   }
 
-  //Metodo para la fecha 
+  //Metodo para la fecha
   get today() {
     return this.dateAdapter.toModel(this.ngbCalendar.getToday())!;
   }
@@ -155,7 +155,7 @@ export class MyEventsComponent implements OnInit {
         this.modalService.dismissAll(true);
         this.getEventos();
         this.enviarNotificacion();
-      } 
+      }
     })
   }
 
@@ -173,7 +173,7 @@ export class MyEventsComponent implements OnInit {
   getEvento(id) {
     this.eventService.findOne(id).subscribe(res => {
       this.evento = res;
-      this.evento.fecha = DateFormatterService(this.evento.fecha);
+/*      this.evento.fecha = DateFormatterService(this.evento.fecha);*/
     });
   }
 
