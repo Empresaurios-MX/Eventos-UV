@@ -49,6 +49,10 @@ export class MyEventsComponent implements OnInit {
   literatura: boolean;
   especial: boolean;
 
+  //Resolucion
+  smartphone: boolean;
+  escritorio: boolean;
+
   constructor(private ngbCalendar: NgbCalendar,
     private dateAdapter: NgbDateAdapter<string>,
     private eventService: EventoDataService,
@@ -64,6 +68,7 @@ export class MyEventsComponent implements OnInit {
   ngOnInit() {
     this.getEventos();
     this.falseTags();
+    this.detectarResolucion();
   }
 
   //Firebase
@@ -276,6 +281,14 @@ export class MyEventsComponent implements OnInit {
       case 'especial':
         this.especial = check;
         break;
+    }
+  }
+
+  detectarResolucion(){
+    if(screen.width < 480){
+      this.smartphone = true;
+    } else {
+      this.escritorio = true;
     }
   }
 }

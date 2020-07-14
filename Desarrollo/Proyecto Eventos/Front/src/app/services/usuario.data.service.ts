@@ -5,6 +5,7 @@ import {catchError, retry} from 'rxjs/operators';
 import {Login} from '../models/login';
 import {Usuario} from '../models/usuario';
 
+
 @Injectable()
 export class UsuarioDataService {
 

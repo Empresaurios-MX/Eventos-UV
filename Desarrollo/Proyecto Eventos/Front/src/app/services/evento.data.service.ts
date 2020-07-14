@@ -7,7 +7,7 @@ import {Evento} from '../models/evento';
 @Injectable()
 export class EventoDataService {
 
-  apiURL = 'http://localhost:10010';
+  apiURL = 'https://eventos-uv-api.herokuapp.com';
 
   constructor(private http: HttpClient) {
   }

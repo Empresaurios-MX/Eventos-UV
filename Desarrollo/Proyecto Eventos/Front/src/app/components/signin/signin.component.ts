@@ -3,6 +3,7 @@ import { Login } from '../../models/login';
 import { UsuarioDataService } from '../../services/usuario.data.service';
 import { Usuario } from '../../models/usuario';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-signin',
@@ -25,18 +26,18 @@ export class SigninComponent implements OnInit {
     if (this.login.rol === 'estudiante') {
       this.service.login(this.login).subscribe(response => {
         this.usuario = response;
-        localStorage.setItem('estudiante', JSON.stringify(this.usuario));
+        sessionStorage.setItem('estudiante', JSON.stringify(this.usuario));
         this.router.navigate(['/eventos']);
       });
       
     } else if (this.login.rol === 'administrador') {
       this.service.login(this.login).subscribe(response => {
         this.usuario = response;
-        localStorage.setItem('admin', JSON.stringify(this.usuario));
+        sessionStorage.setItem('admin', JSON.stringify(this.usuario));
         this.router.navigate(['/miseventos']);
       });
     } else {
-      window.alert('Debe selecionar un rol');
+      Swal.fire('Inicio de sesión','Debe seleccionar un rol','warning');
     }
   }
 }

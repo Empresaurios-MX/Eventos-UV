@@ -1,9 +1,32 @@
-<div class="container p-4">
+<div class="container p-4" *ngIf="smartphone">
   <div class="card rounded" *ngFor="let evento of eventos">
     <div class="card-body">
       <div class="row no-gutters">
         <div class="col-md-4">
           <img srcset="{{evento.foto}}" class="rounded float-left img-fluid" height="240px" width="240px">
+          <h5 class="card-title">{{evento.nombre}}</h5>
+          <p class="card-text">{{evento.descripcion}}</p>
+          <p class="card-text">Impartido por: {{evento.invitados}}</p>
+          <p class="card-text">Fecha: {{evento.fecha}}</p>
+          <p class="card-text">Hora: {{evento.hora}}</p>
+          <p class="card-text">Tags: {{evento.tags}}</p>
+          <div class="row">
+            <button class="btn btn-primary  mx-3" (click)="asistirEvento(evento.id)">Voy a asistir</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container p-4"  *ngIf="escritorio">
+  <div class="card rounded" *ngFor="let evento of eventos">
+    <div class="card-body">
+      <div class="row no-gutters">
+        <div class="col-md-3">
+          <img srcset="{{evento.foto}}" class="rounded float-left img-fluid" height="240px" width="240px">
+        </div>
+        <div class="col-md-8">
           <h5 class="card-title">{{evento.nombre}}</h5>
           <p class="card-text">{{evento.descripcion}}</p>
           <p class="card-text">Impartido por: {{evento.invitados}}</p>

@@ -1,4 +1,4 @@
-@media (max-width: 480px) {
+@media (max-width: 1024px) {
     img {
         height: 100px;
         width: 100px;
@@ -8,18 +8,5 @@
         size: 150px;
         text-align: end;
         font-size: small;
-    }
-}
-
-@media (max-width: 360px) {
-    img {
-        height: 1000px;
-        width: 1000px;
-    }
-    
-    .card-body{
-        size: 150px;
-        text-align: right;
-        font-size: x-small;
     }
 }

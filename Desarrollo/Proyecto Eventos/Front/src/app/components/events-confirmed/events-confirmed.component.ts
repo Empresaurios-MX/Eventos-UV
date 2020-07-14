@@ -13,6 +13,8 @@ export class EventsConfirmedComponent implements OnInit {
   evento: Evento;
   eventos: any;
   usuario: Usuario;
+  smartphone: boolean;
+  escritorio: boolean;
 
   constructor(private eventService: EventoDataService) {
     this.eventos = [];
@@ -22,6 +24,14 @@ export class EventsConfirmedComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  etectarResolucion(){
+    if(screen.width < 480){
+      this.smartphone = true;
+    } else {
+      this.escritorio = true;
+    }
   }
 
 }

@@ -17,6 +17,8 @@ export class EventsComponent implements OnInit {
   evento: Evento;
   usuario: Usuario;
   usuarioEvento : UsuarioEvento;
+  smartphone: boolean;
+  escritorio: boolean;
 
   constructor(private eventService: EventoDataService, private eventUsuarioService: UsuarioEventoDataDataService, private toastr: ToastrService) {
     this.eventos = [];
@@ -27,6 +29,7 @@ export class EventsComponent implements OnInit {
 
   ngOnInit() {
     this.getEventos();
+    this.detectarResolucion();
   }
 
   asistirEvento(id: number){
@@ -55,6 +58,14 @@ export class EventsComponent implements OnInit {
 
   notificacionExitosaAsistir() {
     this.toastr.success("Su asistencia fue confirmada para el evento");
+  }
+
+  detectarResolucion(){
+    if(screen.width < 480){
+      this.smartphone = true;
+    } else {
+      this.escritorio = true;
+    }
   }
 }
 

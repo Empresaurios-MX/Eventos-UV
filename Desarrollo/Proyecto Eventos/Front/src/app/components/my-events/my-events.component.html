@@ -6,29 +6,55 @@
     </button>
   </div>
 
-  <!-- Feed de eventos -->
-  <div class="card rounded" *ngFor="let evento of eventos">
-    <div class="card-body">
-      <div class="row no-gutters">
-        <div class="col-md-3">
-          <img src="{{evento.foto}}" class="rounded float-left img-fluid" width="240" height="240">
-        </div>
-        <div class="col-md-8">
-          <h5 class="card-title">{{evento.nombre}}</h5>
-          <p class="card-text">{{evento.descripcion}}</p>
-          <p>Impartido por: {{evento.invitados}}</p>
-          <p>Fecha: {{evento.fecha}}</p>
-          <p>Hora: {{evento.hora}}</p>
-          <p>Tags: {{evento.tags}}</p>
-          <div class="row">
-            <button class="btn btn-secondary mx-3"
-              (click)="mostrarModalEditar(nombreModalEditar);getEvento(evento.id)">Editar</button>
-            <button class="btn btn-danger" (click)="deleteEvento(evento.id)">Eliminar</button>
+  <!-- Feed de eventos movil-->
+  <div *ngIf="smartphone">
+    <div class="card rounded" *ngFor="let evento of eventos">
+      <div class="card-body">
+        <div class="row no-gutters">
+          <div class="col-md-3">
+            <img src="{{evento.foto}}" class="rounded float-left img-fluid" width="240" height="240">
+            <h5 class="card-title">{{evento.nombre}}</h5>
+            <p class="card-text">{{evento.descripcion}}</p>
+            <p>Impartido por: {{evento.invitados}}</p>
+            <p>Fecha: {{evento.fecha}}</p>
+            <p>Hora: {{evento.hora}}</p>
+            <p>Tags: {{evento.tags}}</p>
+            <div class="row">
+              <button class="btn btn-secondary mx-3"
+                (click)="mostrarModalEditar(nombreModalEditar);getEvento(evento.id)">Editar</button>
+              <button class="btn btn-danger" (click)="deleteEvento(evento.id)">Eliminar</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+   <!-- Feed de eventos escritorio-->
+   <div *ngIf="escritorio">
+    <div class="card rounded" *ngFor="let evento of eventos">
+      <div class="card-body">
+        <div class="row no-gutters">
+          <div class="col-md-3">
+            <img src="{{evento.foto}}" class="rounded float-left img-fluid" width="240" height="240">
+          </div>
+          <div class="col-md-8">
+            <h5 class="card-title">{{evento.nombre}}</h5>
+            <p class="card-text">{{evento.descripcion}}</p>
+            <p>Impartido por: {{evento.invitados}}</p>
+            <p>Fecha: {{evento.fecha}}</p>
+            <p>Hora: {{evento.hora}}</p>
+            <p>Tags: {{evento.tags}}</p>
+            <div class="row">
+              <button class="btn btn-secondary mx-3"
+                (click)="mostrarModalEditar(nombreModalEditar);getEvento(evento.id)">Editar</button>
+              <button class="btn btn-danger" (click)="deleteEvento(evento.id)">Eliminar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   </div>
 
   <!-- Modal Crear-->
   <ng-template #nombreModalCrear>
