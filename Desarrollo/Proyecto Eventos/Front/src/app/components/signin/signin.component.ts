@@ -4,6 +4,7 @@ import { UsuarioDataService } from '../../services/usuario.data.service';
 import { Usuario } from '../../models/usuario';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-signin',
@@ -25,6 +26,7 @@ export class SigninComponent implements OnInit {
   signIn() {
     if (this.login.rol === 'estudiante') {
       this.service.login(this.login).subscribe(response => {
+        NavbarComponent.updateUserStatus.next(true); // here! 
         this.usuario = response;
         sessionStorage.setItem('estudiante', JSON.stringify(this.usuario));
         this.router.navigate(['/eventos']);
@@ -32,6 +34,7 @@ export class SigninComponent implements OnInit {
       
     } else if (this.login.rol === 'administrador') {
       this.service.login(this.login).subscribe(response => {
+        NavbarComponent.updateAdminStatus.next(true); // here! 
         this.usuario = response;
         sessionStorage.setItem('admin', JSON.stringify(this.usuario));
         this.router.navigate(['/miseventos']);

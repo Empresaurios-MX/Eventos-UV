@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {UsuarioEvento} from '../models/usuario-evento';
 import {Observable, throwError} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,7 @@ export class UsuarioEventoDataDataService {
       .pipe(retry(1), catchError(this.handleError));
   }
 
+  //Componer
   delete(usuarioEvento: UsuarioEvento) {
     return this.http.delete(this.apiURL + '/usuario-evento', this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
@@ -43,7 +45,7 @@ export class UsuarioEventoDataDataService {
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
 
-    window.alert(errorMessage);
+    Swal.fire('Error','Algo ha salido mal, por favor intentalo más tarde','error');
 
     return throwError(errorMessage);
   }

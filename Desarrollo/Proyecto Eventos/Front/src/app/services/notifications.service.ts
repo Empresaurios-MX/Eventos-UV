@@ -6,6 +6,7 @@ import { take, retry, catchError } from 'rxjs/operators';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Notification } from '../models/notification';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +46,7 @@ export class NotificationsService {
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
 
-    window.alert(errorMessage);
+    Swal.fire('Error','Algo ha salido mal, por favor intentalo más tarde','error');
 
     return throwError(errorMessage);
   }

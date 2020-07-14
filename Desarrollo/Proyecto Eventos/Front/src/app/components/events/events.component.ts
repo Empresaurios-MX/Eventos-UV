@@ -5,6 +5,7 @@ import { Usuario } from '../../models/usuario';
 import { UsuarioEvento } from '../../models/usuario-evento';
 import { Evento } from 'src/app/models/evento';
 import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-tasks',
@@ -38,9 +39,8 @@ export class EventsComponent implements OnInit {
     this.getEvento(id);
     this.eventUsuarioService.create(this.usuarioEvento).subscribe(res => {
       if (res) {
-        
         this.notificacionExitosaAsistir();
-      }
+      } 
     })
   }
 

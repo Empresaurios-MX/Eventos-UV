@@ -4,7 +4,7 @@ import {Observable, throwError} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
 import {Login} from '../models/login';
 import {Usuario} from '../models/usuario';
-
+import Swal from 'sweetalert2';
 
 @Injectable()
 export class UsuarioDataService {
@@ -23,11 +23,11 @@ export class UsuarioDataService {
   };
 
   login(login: Login): Observable<Usuario> {
-    return this.http.post<Usuario>(this.apiURL + '/login', login, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+    return this.http.post<Usuario>(this.apiURL + '/login', login, this.httpOptions).pipe(retry(1), catchError(this.handleErrorLogin));
   }
 
   register(usuario: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(this.apiURL + '/usuarios', usuario, this.httpOptions).pipe(retry(1), catchError(this.handleError));
+    return this.http.post<Usuario>(this.apiURL + '/usuarios', usuario, this.httpOptions).pipe(retry(1), catchError(this.handleErrorRegister));
   }
 
   findOne(id): Observable<Usuario> {
@@ -38,7 +38,7 @@ export class UsuarioDataService {
     return this.http.put<Usuario>(this.apiURL + '/usuarios/' + id, usuario, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
-  handleError(error) {
+  handleErrorLogin(error){
     let errorMessage;
 
     if (error.error instanceof ErrorEvent) {
@@ -49,7 +49,39 @@ export class UsuarioDataService {
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
 
-    window.alert(errorMessage);
+    Swal.fire('Inicio de sesión','Credenciales incorrectas, por favor vuelva a intentarlo','error');
+
+    return throwError(errorMessage);
+  }
+
+  handleErrorRegister(error){
+    let errorMessage;
+
+    if (error.error instanceof ErrorEvent) {
+      // Get client-side error
+      errorMessage = error.error.message;
+    } else {
+      // Get server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    
+    Swal.fire('Registro incorrecto','Algo ha salido mal, por favor vuelve a intentarlo','error');
+
+    return throwError(errorMessage);
+  }
+
+  handleError(error){
+    let errorMessage;
+
+    if (error.error instanceof ErrorEvent) {
+      // Get client-side error
+      errorMessage = error.error.message;
+    } else {
+      // Get server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    
+   Swal.fire('Error','Algo ha salido mal, por favor vuelve a intentarlo','error');
 
     return throwError(errorMessage);
   }

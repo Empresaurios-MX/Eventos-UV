@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
 import {Evento} from '../models/evento';
+import Swal from 'sweetalert2';
 
 @Injectable()
 export class EventoDataService {
@@ -54,7 +55,7 @@ export class EventoDataService {
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
 
-    window.alert(errorMessage);
+    Swal.fire('Error','Algo ha salido mal, por favor intentalo más tarde','error');
 
     return throwError(errorMessage);
   }

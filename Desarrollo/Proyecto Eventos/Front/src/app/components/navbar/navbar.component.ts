@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
+import { Subject } from 'rxjs'
 
 @Component({
   selector: 'app-navbar',
@@ -15,6 +15,18 @@ export class NavbarComponent implements OnInit {
   visiblePerfil: boolean;
 
   constructor() {
+
+    NavbarComponent.updateAdminStatus.subscribe(res => {
+      this.visibleAdmin = true;
+      this.visiblePerfil = true;
+      this.visibleAnonimo = false;
+     });
+
+     NavbarComponent.updateUserStatus.subscribe(res => {
+      this.visibleEstudiante = true;
+      this.visiblePerfil = true;
+      this.visibleAnonimo = false;
+     });
   }
 
   ngOnInit(): void {
@@ -22,16 +34,20 @@ export class NavbarComponent implements OnInit {
   }
 
   public isMenuCollapsed = true;
+  public static updateUserStatus: Subject<boolean> = new Subject(); 
+  public static updateAdminStatus: Subject<boolean> = new Subject();
 
   opcionesMenu() {
-    if (localStorage.getItem('estudiante')) {
+    if (sessionStorage.getItem('estudiante')) {
       this.visibleEstudiante = true;
       this.visiblePerfil = true;
-    } else if (localStorage.getItem('admin')) {
+    } else if (sessionStorage.getItem('admin')) {
       this.visibleAdmin = true;
       this.visiblePerfil = true;
     } else {
       this.visibleAnonimo = true;
     }
   }
+
+  
 }
