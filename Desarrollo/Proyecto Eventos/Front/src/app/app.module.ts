@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {NgbModal, ModalDismissReasons, NgbModule, NgbAlert} from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {ToastrModule} from 'ngx-toastr'; 
+import {ToastrModule} from 'ngx-toastr';
 
 
 import {AppRoutingModule} from './app-routing.module';
@@ -27,6 +27,7 @@ import {environment} from '../environments/environment';
 import {ProfileComponent} from './components/profile/profile.component';
 import {AsyncPipe} from '../../node_modules/@angular/common';
 import {NotificationsService} from './services/notifications.service'
+import {EstadisticasDataService} from './services/estadisticas.data.service';
 
 
 @NgModule({
@@ -54,7 +55,7 @@ import {NotificationsService} from './services/notifications.service'
     AngularFireStorageModule,
     AngularFireMessagingModule
   ],
-  providers: [UsuarioDataService, EventoDataService, AsyncPipe, NotificationsService],
+  providers: [UsuarioDataService, EventoDataService, AsyncPipe, NotificationsService, EstadisticasDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
