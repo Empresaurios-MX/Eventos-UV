@@ -16,17 +16,11 @@
     "operatorsAliases": 0
   },
   "production": {
-    "username": "postgres",
-    "password": "root",
-    "database": "testing",
-    "host": "127.0.0.1",
+    "username": "awsceufk",
+    "password": "ycgAUXe0OXf-S6LnVv6PoRe1EkqrnbjP",
+    "database": "awsceufk",
+    "host": "otto.db.elephantsql.com",
     "dialect": "postgresql",
-    "operatorsAliases": 0,
-    "ssl": true,
-    "dialectOptions": {
-      "ssl": {
-        "require": true
-      }
-    }
+    "operatorsAliases": 0
   }
 }

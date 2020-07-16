@@ -269,6 +269,56 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+            
+  /estadisticas/contar/{contexto}:
+    x-swagger-router-controller: estadisticas.controller
+    
+    get:
+      operationId: calcularRegistros
+      parameters:
+        - name: contexto
+          type: string
+          in: path
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/CountResponse"
+        default:
+          description: Error
+          schema: 
+            $ref: "#/definitions/ErrorResponse"
+            
+  /estadisticas/popularidad/eventos:
+    x-swagger-router-controller: estadisticas.controller
+    
+    get:
+      operationId: eventoPopular
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/EventoPopularResponse"
+        default:
+          description: Error
+          schema: 
+            $ref: "#/definitions/ErrorResponse"
+            
+  /estadisticas/participantes/eventos:
+    x-swagger-router-controller: estadisticas.controller
+    
+    get:
+      operationId: eventoParticipantes
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/EventoParticipantesList"
+        default:
+          description: Error
+          schema: 
+            $ref: "#/definitions/ErrorResponse"
   
   /swagger:
     x-swagger-pipe: swagger_raw
@@ -463,4 +513,38 @@ definitions:
       - id
       - usuarioId
       - eventoId
+      
+# Estadisticas
+
+  CountResponse:
+    type: object
+    properties:
+      contexto:
+        type: string
+      resultado:
+        type: number
+    required:
+      - contexto
+      - resultado
+  
+  EventoPopularResponse:
+    type: object
+    properties:
+      id:
+        type: number
+      nombre: 
+        type: string
+      participantes:
+        type: number
+    required:
+      - id
+      - nombre
+      - participantes
+      
+  EventoParticipantesList: 
+    properties:
+      eventos:
+        type: array
+        items:
+          $ref: "#/definitions/EventoPopularResponse"  
 
