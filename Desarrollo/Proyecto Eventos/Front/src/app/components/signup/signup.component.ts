@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Usuario} from '../../models/usuario';
 import {UsuarioDataService} from '../../services/usuario.data.service';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -21,7 +23,7 @@ export class SignupComponent implements OnInit {
   literatura: boolean;
   especial: boolean;
 
-  constructor(private service: UsuarioDataService) {
+  constructor(private service: UsuarioDataService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -45,9 +47,12 @@ export class SignupComponent implements OnInit {
 
     this.service.register(this.usuario).subscribe(response => {
       if (response) {
-        console.log('Registrado');
+        Swal.fire('Usuario registrado','Registro realizado con exito','success');
+        this.router.navigate(['/signin']);
+      } else {
+        console.log(response);
+        Swal.fire('Registro','Algo salió mal, por favor vuelve a intentarlo más tarde','error');
       }
-      console.log(response);
     });
   }
 

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Evento } from 'src/app/models/evento';
 import { EventoDataService } from '../../services/evento.data.service';
 import { Usuario } from '../../models/usuario';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-events-confirmed',
@@ -16,17 +18,22 @@ export class EventsConfirmedComponent implements OnInit {
   smartphone: boolean;
   escritorio: boolean;
 
-  constructor(private eventService: EventoDataService) {
+  constructor(private eventService: EventoDataService, private router: Router) {
     this.eventos = [];
-    var usuarioGuardado = localStorage.getItem('usuario');
+    var usuarioGuardado = sessionStorage.getItem('estudiante');
     this.usuario = JSON.parse(usuarioGuardado);
     this.eventos = this.usuario.eventos;
+    if(this.eventos === null){
+      Swal.fire('Error', 'No has confirmado tu asistencia a ningún evento', 'error');
+      this.router.navigate(['/eventos']);
+    } 
   }
 
   ngOnInit(): void {
+    this.detectarResolucion();
   }
 
-  etectarResolucion(){
+  detectarResolucion(){
     if(screen.width < 480){
       this.smartphone = true;
     } else {

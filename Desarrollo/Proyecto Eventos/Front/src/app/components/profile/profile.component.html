@@ -1,3 +1,48 @@
 <div class="container p-4">
-    <p>profile works!</p>
+    <div class="card rounded">
+        <div class="card-body">
+            <div class="col-md-12">
+                <button class="btn btn-warning float-right" (click)="mostrarModal(modalPassword)">Cambiar
+                    contraseña</button>
+            </div>
+            <div class="container p-2">
+                <div class="col-md-8">
+                    <div class="card-title">
+                        <h3>¡Bienvenido! {{saludo}} <img src="{{imagenSaludo}}" style="width: 40px;"></h3>
+                    </div>
+                    <div class="container p-md-4">
+                        <p class="cart-text">Nombre: {{usuario.nombre}}</p>
+                        <p class="card-text">Apellidos: {{usuario.apellidos}}</p>
+                        <p class="card-text">Correo electronico: {{usuario.email}}</p>
+                    </div>
+                    <h5>Mis etiquetas: </h5>
+                    <p class="cart-text">{{usuario.intereses}}</p>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <button class="btn btn-danger float-right" (click)="cerrarSesion()">Cerrar sesión</button>
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- Modal cambiar contraseña -->
+<ng-template #modalPassword>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="modalPass">Cambiar contraseña</h5>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="form-inline">
+                    <label for="recipient-name" class="col-form-label col-sm-3">Nueva contraseña: </label>
+                    <input type="text" [(ngModel)]="newPassword" name="password" class="form-control col-lg-8"
+                        id="recipient-name" autocomplete="off">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Confirmar</button>
+      </div>
+</ng-template>
