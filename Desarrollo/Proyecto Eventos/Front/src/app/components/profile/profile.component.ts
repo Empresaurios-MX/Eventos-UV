@@ -18,6 +18,17 @@ export class ProfileComponent implements OnInit {
   imagenSaludo: string;
   newPassword: string;
 
+  //Interes
+  arte: boolean;
+  musica: boolean;
+  ciencia: boolean;
+  baile: boolean;
+  medicina: boolean;
+  cultura: boolean;
+  recreacion: boolean;
+  literatura: boolean;
+  especial: boolean;
+
   constructor(private usuarioService: UsuarioDataService, private modalService: NgbModal, private router: Router) { }
 
 
@@ -35,7 +46,7 @@ export class ProfileComponent implements OnInit {
   mostrarSaludo() {
     var fecha = new Date();
     var hora = fecha.getHours();
-    if (hora >= 0 && hora <12) {
+    if (hora >= 0 && hora < 12) {
       this.saludo = 'Buenos días';
       this.imagenSaludo = '../../../assets/images/buenosDias.png';
     } else if (hora >= 12 && hora < 19) {
@@ -47,15 +58,105 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  mostrarModal(modal){
-    this.modalService.open(modal, { size: 'lg', centered: true});
+  mostrarModalPassword(modal) {
+    this.modalService.open(modal, { size: 'lg', centered: true });
   }
 
-  cerrarSesion(){
+  cambiarPass(newPassword){
+    this.usuario.password = newPassword;
+    this.usuarioService.update(this.usuario.id, this.usuario).subscribe(res => {
+      if(res){
+        this.modalService.dismissAll(true);
+        Swal.fire('Contraseña actualizada', 'La contraseña ha sido actualizada con exito', 'success');
+      }
+    });
+  }
+
+  mostrarModalActualizar(modal) {
+    this.modalService.open(modal, { size: 'lg' });
+  }
+
+  actualizarDatos(){
+    this.usuarioService.update(this.usuario.id, this.usuario).subscribe(res => {
+      if(res){
+        this.modalService.dismissAll(true);
+        Swal.fire('Actualización de datos', 'Los nuevos datos han sido guardados correctamente', 'success');
+      }
+    });
+  }
+
+  cerrarSesion() {
     Swal.fire('Cerrar sesión', 'La sesión se ha cerrado correctamente', 'success');
     this.router.navigate(['/signin']);
     sessionStorage.removeItem('estudiante');
-    NavbarComponent.updateUserStatus.next(true); // Componer
+    NavbarComponent.updateUserStatus.next(true); // Componer, falta es subscribe
   }
+
+  //Metodo para obtener los tags
+  getTags(): string[] {
+    const intereses = [];
+
+    if (this.arte) {
+      intereses.push('Arte');
+    }
+    if (this.musica) {
+      intereses.push('Musica');
+    }
+    if (this.ciencia) {
+      intereses.push('Ciencia');
+    }
+    if (this.baile) {
+      intereses.push('Baile');
+    }
+    if (this.medicina) {
+      intereses.push('Medicina');
+    }
+    if (this.cultura) {
+      intereses.push('Cultura');
+    }
+    if (this.recreacion) {
+      intereses.push('Recreacion');
+    }
+    if (this.literatura) {
+      intereses.push('Literatura');
+    }
+    if (this.especial) {
+      intereses.push('Especial');
+    }
+    return intereses;
+  }
+
+  check(interes: string, check: boolean) {
+    switch (interes) {
+      case 'arte':
+        this.arte = check;
+        break;
+      case 'musica':
+        this.musica = check;
+        break;
+      case 'ciencia':
+        this.ciencia = check;
+        break;
+      case 'baile':
+        this.baile = check;
+        break;
+      case 'medicina':
+        this.medicina = check;
+        break;
+      case 'cultura':
+        this.cultura = check;
+        break;
+      case 'recreacion':
+        this.recreacion = check;
+        break;
+      case 'literatura':
+        this.literatura = check;
+        break;
+      case 'especial':
+        this.especial = check;
+        break;
+    }
+  }
+
 
 }

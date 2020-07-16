@@ -2,8 +2,12 @@
     <div class="card rounded">
         <div class="card-body">
             <div class="col-md-12">
-                <button class="btn btn-warning float-right" (click)="mostrarModal(modalPassword)">Cambiar
+                <button class="btn btn-warning float-right" (click)="mostrarModalPassword(modalPassword)">Cambiar
                     contraseña</button>
+            </div>
+            <div class="col-md-10">
+                <button class="btn btn-info float-right" (click)="mostrarModalActualizar(modaActualizar)">Actualizar
+                    datos</button>
             </div>
             <div class="container p-2">
                 <div class="col-md-8">
@@ -15,8 +19,10 @@
                         <p class="card-text">Apellidos: {{usuario.apellidos}}</p>
                         <p class="card-text">Correo electronico: {{usuario.email}}</p>
                     </div>
-                    <h5>Mis etiquetas: </h5>
-                    <p class="cart-text">{{usuario.intereses}}</p>
+                    <h5>Mis interes: </h5>
+                    <div class="container p-md-4">
+                        <p class="cart-text">{{usuario.intereses}}</p>
+                    </div>
                 </div>
             </div>
             <div class="col-md-12">
@@ -36,13 +42,125 @@
             <form>
                 <div class="form-inline">
                     <label for="recipient-name" class="col-form-label col-sm-3">Nueva contraseña: </label>
-                    <input type="text" [(ngModel)]="newPassword" name="password" class="form-control col-lg-8"
+                    <input type="password" [(ngModel)]="newPassword" name="password" class="form-control col-lg-8"
                         id="recipient-name" autocomplete="off">
                 </div>
             </form>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Confirmar</button>
-      </div>
+        <button type="button" class="btn btn-primary" data-dismiss="modal"
+            (click)="cambiarPass()">Confirmar</button>
+    </div>
+</ng-template>
+
+<!-- Modal actualizar datos -->
+<ng-template #modaActualizar>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="modalPass">Actualizar datos</h5>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="row">
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Nombre:</label>
+                            <input type="text" [(ngModel)]="usuario.nombre" name="nombre" class="form-control"
+                                id="recipient-name" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Apellidos:</label>
+                            <input type="text" [(ngModel)]="usuario.apellidos" name="apellidos" class="form-control"
+                                id="recipient-name" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-8">
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Correo electrónico:</label>
+                            <input type="text" [(ngModel)]="usuario.email" name="emaiñ" class="form-control"
+                                id="recipient-name" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-7">
+                        <label class="col-form-label">Intereses: </label>
+                        <div class="form-group">
+                            <div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input type="checkbox" class="custom-control-input" id="check1" [checked]="arte"
+                                        (change)="check('arte', !arte)">
+                                    <label class="custom-control-label" for="check1">Arte</label>
+                                </div>
+
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input type="checkbox" class="custom-control-input" id="check2" [checked]="musica"
+                                        (change)="check('musica', !musica)">
+                                    <label class="custom-control-label" for="check2">Música</label>
+                                </div>
+
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input type="checkbox" class="custom-control-input" id="check3" [checked]="ciencia"
+                                        (change)="check('ciencia', !ciencia)">
+                                    <label class="custom-control-label" for="check3">Ciencia</label>
+                                </div>
+
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input type="checkbox" class="custom-control-input" id="check6" [checked]="baile"
+                                        (change)="check('baile', !baile)">
+                                    <label class="custom-control-label" for="check6">Baile</label>
+                                </div>
+                            </div>
+
+                            <div style="height: 0.75em"></div>
+
+                            <div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input type="checkbox" class="custom-control-input" id="check5" [checked]="medicina"
+                                        (change)="check('medicina', !medicina)">
+                                    <label class="custom-control-label" for="check5">Medicina</label>
+                                </div>
+
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input type="checkbox" class="custom-control-input" id="check4" [checked]="cultura"
+                                        (change)="check('cultura', !cultura)">
+                                    <label class="custom-control-label" for="check4">Cultura</label>
+                                </div>
+
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input type="checkbox" class="custom-control-input" id="check7"
+                                        [checked]="recreacion" (change)="check('recreacion', !recreacion)">
+                                    <label class="custom-control-label" for="check7">Recreación</label>
+                                </div>
+                            </div>
+
+                            <div style="height: 0.75em"></div>
+
+                            <div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input type="checkbox" class="custom-control-input" id="check8"
+                                        [checked]="literatura" (change)="check('literatura', !literatura)">
+                                    <label class="custom-control-label" for="check8">Literatura</label>
+                                </div>
+
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input type="checkbox" class="custom-control-input" id="check9" [checked]="especial"
+                                        (change)="check('especial', !especial)">
+                                    <label class="custom-control-label" for="check9">Especial</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal"
+            (click)="actualizarDatos()">Actualizar</button>
+    </div>
 </ng-template>
