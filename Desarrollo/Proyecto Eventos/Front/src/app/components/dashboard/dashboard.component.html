@@ -39,6 +39,14 @@
         <div class="container p-4">
             <h3>Mis Participantes</h3>
         </div>
-
+        <div class="card cardEventos bg-dark text-white text-center rounded col-sm-3" *ngFor="let evento of eventos">
+            <img src="https://bucket3.glanacion.com/anexos/fotos/38/3089038.jpg" class="card-img fondo">
+            <div class="card-img-overlay">
+                <div class="card-title">
+                    <h5>{{evento.nombre}}</h5>
+                </div>
+                <h5>{{evento.participantes}}</h5>
+            </div>
+        </div>
     </div>
 </div>

@@ -12,10 +12,13 @@ export class DashboardComponent implements OnInit {
   numUsuarios: any;
   eventoPop: string;
   partEventoPopular: number;
+  eventos: any;
 
   constructor(private service: EstadisticasDataService) { }
 
   ngOnInit(): void {
+    this.eventos = [];
+    this.getEventosDashboard();
     this.contarUsuarios();
     this.contarEventos();
     this.eventoPopular();
@@ -37,6 +40,12 @@ export class DashboardComponent implements OnInit {
     this.service.eventoPopular().subscribe(value => {
       this.eventoPop = value.nombre;
       this.partEventoPopular = value.participantes;
+    });
+  }
+
+  getEventosDashboard(){
+    this.service.usuariosPorEvento().subscribe(value => {
+      this.eventos = value;
     });
   }
 }

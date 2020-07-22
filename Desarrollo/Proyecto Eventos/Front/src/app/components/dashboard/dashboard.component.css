@@ -3,6 +3,14 @@
     margin-left: 35px;
 }
 
+.cardEventos{
+    margin-bottom: 35px;
+}
+
 h3{
     text-align: center;
+}
+
+.fondo{
+    filter:brightness(0.5);
 }
