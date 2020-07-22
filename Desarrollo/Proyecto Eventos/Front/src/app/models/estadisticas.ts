@@ -6,5 +6,6 @@ export class CountResponse {
 export class EventoPopularResponse {
   id: number;
   nombre: string;
+  imagen: string;
   participantes: number;
 }
