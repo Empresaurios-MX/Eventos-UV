@@ -28,7 +28,7 @@ export class SigninComponent implements OnInit {
       this.service.login(this.login).subscribe(response => {
         NavbarComponent.updateUserStatus.next(true); // here! 
         this.usuario = response;
-        sessionStorage.setItem('estudiante', JSON.stringify(this.usuario));
+        localStorage.setItem('estudiante', JSON.stringify(this.usuario));
         this.router.navigate(['/eventos']);
       });
       
@@ -36,7 +36,7 @@ export class SigninComponent implements OnInit {
       this.service.login(this.login).subscribe(response => {
         NavbarComponent.updateAdminStatus.next(true); // here! 
         this.usuario = response;
-        sessionStorage.setItem('admin', JSON.stringify(this.usuario));
+        localStorage.setItem('admin', JSON.stringify(this.usuario));
         this.router.navigate(['/miseventos']);
       });
     } else {

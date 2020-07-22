@@ -38,10 +38,10 @@ export class NavbarComponent implements OnInit {
   public static updateAdminStatus: Subject<boolean> = new Subject();
 
   opcionesMenu() {
-    if (sessionStorage.getItem('estudiante')) {
+    if (localStorage.getItem('estudiante')) {
       this.visibleEstudiante = true;
       this.visiblePerfil = true;
-    } else if (sessionStorage.getItem('admin')) {
+    } else if (localStorage.getItem('admin')) {
       this.visibleAdmin = true;
       this.visiblePerfil = true;
     } else {

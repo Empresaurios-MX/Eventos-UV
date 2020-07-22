@@ -1,3 +1,4 @@
+<!-- Feed de eventos movil-->
 <div class="container p-4" *ngIf="smartphone">
   <div class="card rounded" *ngFor="let evento of eventos">
     <div class="card-body">
@@ -19,6 +20,7 @@
   </div>
 </div>
 
+<!-- Feed de eventos escritorio-->
 <div class="container p-4"  *ngIf="escritorio">
   <div class="card rounded" *ngFor="let evento of eventos">
     <div class="card-body">
@@ -34,7 +36,7 @@
           <p class="card-text">Hora: {{evento.hora}}</p>
           <p class="card-text">Tags: {{evento.tags}}</p>
           <div class="row">
-            <button class="btn btn-primary  mx-3">Ya no asistire</button>
+            <button class="btn btn-danger mx-3">Ya no asistire</button>
           </div>
         </div>
       </div>

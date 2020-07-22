@@ -1,3 +1,4 @@
+<!-- Feed de eventos movil-->
 <div class="container p-4" *ngIf="smartphone">
   <div class="card rounded" *ngFor="let evento of eventos">
     <div class="card-body">
@@ -19,7 +20,8 @@
   </div>
 </div>
 
-<div class="container p-4"  *ngIf="escritorio">
+<!-- Feed de eventos escritorio-->
+<div class="container p-4" *ngIf="escritorio">
   <div class="card rounded" *ngFor="let evento of eventos">
     <div class="card-body">
       <div class="row no-gutters">

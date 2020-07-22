@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventoDataService } from '../../services/evento.data.service';
 import { UsuarioEventoDataDataService } from '../../services/usuario-evento.data.service';
+import { UsuarioDataService } from '../../services/usuario.data.service';
 import { Usuario } from '../../models/usuario';
 import { UsuarioEvento } from '../../models/usuario-evento';
 import { Evento } from 'src/app/models/evento';
@@ -20,10 +21,10 @@ export class EventsComponent implements OnInit {
   smartphone: boolean;
   escritorio: boolean;
 
-  constructor(private eventService: EventoDataService, private eventUsuarioService: UsuarioEventoDataDataService, private toastr: ToastrService) {
+  constructor(private eventService: EventoDataService, private eventUsuarioService: UsuarioEventoDataDataService, private toastr: ToastrService, private usuarioService: UsuarioDataService) {
     this.eventos = [];
     this.usuarioEvento = new UsuarioEvento();
-    var usuarioGuardado = localStorage.getItem('usuario');
+    var usuarioGuardado = localStorage.getItem('estudiante');
     this.usuario = JSON.parse(usuarioGuardado);
   }
 
@@ -39,6 +40,7 @@ export class EventsComponent implements OnInit {
     this.eventUsuarioService.create(this.usuarioEvento).subscribe(res => {
       if (res) {
         this.notificacionExitosaAsistir();
+        this.refrescarStorage();
       } 
     })
   }
@@ -65,6 +67,18 @@ export class EventsComponent implements OnInit {
     } else {
       this.escritorio = true;
     }
+  }
+
+  refrescarStorage(){
+    var usuarioGuardado;
+    usuarioGuardado = localStorage.getItem('estudiante');
+    this.usuario = JSON.parse(usuarioGuardado);
+    console.log(this.usuario);
+    this.usuarioService.findOne(this.usuario.id).subscribe(response => {
+      this.usuario = response;
+      console.log(this.usuario);
+      localStorage.setItem('estudiante', JSON.stringify(this.usuario));
+    });
   }
 }
 

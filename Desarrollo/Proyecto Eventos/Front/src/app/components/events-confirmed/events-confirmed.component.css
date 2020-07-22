@@ -1,0 +1,16 @@
+@media (max-width: 1024px) {
+    img {
+        height: 100px;
+        width: 100px;
+    }
+    
+    .card-body{
+        size: 150px;
+        text-align: end;
+        font-size: small;
+    }
+}
+
+.card {
+    margin: 5px;
+}

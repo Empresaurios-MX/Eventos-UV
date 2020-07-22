@@ -18,9 +18,9 @@ export class EventsConfirmedComponent implements OnInit {
   smartphone: boolean;
   escritorio: boolean;
 
-  constructor(private eventService: EventoDataService, private router: Router) {
+  constructor(private router: Router) {
     this.eventos = [];
-    var usuarioGuardado = sessionStorage.getItem('estudiante');
+    var usuarioGuardado = localStorage.getItem('estudiante');
     this.usuario = JSON.parse(usuarioGuardado);
     this.eventos = this.usuario.eventos;
     if(this.eventos === null){

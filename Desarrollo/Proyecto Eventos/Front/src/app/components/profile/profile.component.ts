@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../models/usuario';
 import { UsuarioDataService } from '../../services/usuario.data.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -35,10 +35,10 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.mostrarSaludo();
     var usuarioGuardado;
-    if (sessionStorage.getItem('admin')) {
-      usuarioGuardado = sessionStorage.getItem('admin');
-    } else if (sessionStorage.getItem('estudiante')) {
-      usuarioGuardado = sessionStorage.getItem('estudiante');
+    if (localStorage.getItem('admin')) {
+      usuarioGuardado = localStorage.getItem('admin');
+    } else if (localStorage.getItem('estudiante')) {
+      usuarioGuardado = localStorage.getItem('estudiante');
     }
     this.usuario = JSON.parse(usuarioGuardado);
   }
@@ -88,7 +88,8 @@ export class ProfileComponent implements OnInit {
   cerrarSesion() {
     Swal.fire('Cerrar sesión', 'La sesión se ha cerrado correctamente', 'success');
     this.router.navigate(['/signin']);
-    sessionStorage.removeItem('estudiante');
+    localStorage.removeItem('estudiante');
+    localStorage.removeItem('admin');
     NavbarComponent.updateUserStatus.next(true); // Componer, falta es subscribe
   }
 
