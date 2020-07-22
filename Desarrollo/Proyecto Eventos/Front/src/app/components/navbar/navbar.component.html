@@ -1,7 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark colorNavBar">
  
-
-  <a class="navbar-brand" href="">Eventos UV</a>
+  <a class="navbar-brand">Eventos UV</a>
   <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
     &#9776;
   </button>
@@ -37,7 +36,12 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="/perfil" routerLinkActive="active" *ngIf="visiblePerfil"
+          <a class="nav-link" routerLink="/perfil" routerLinkActive="active" *ngIf="visibleEstudiante"
+            (click)="isMenuCollapsed = true">Mi Perfil</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/perfil/admin" routerLinkActive="active" *ngIf="visibleAdmin"
             (click)="isMenuCollapsed = true">Mi Perfil</a>
         </li>
       </ul>

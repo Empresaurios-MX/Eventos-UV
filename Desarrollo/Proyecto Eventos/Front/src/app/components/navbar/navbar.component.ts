@@ -12,19 +12,16 @@ export class NavbarComponent implements OnInit {
   visibleAnonimo: boolean;
   visibleEstudiante: boolean;
   visibleAdmin: boolean;
-  visiblePerfil: boolean;
 
   constructor() {
 
     NavbarComponent.updateAdminStatus.subscribe(res => {
       this.visibleAdmin = true;
-      this.visiblePerfil = true;
       this.visibleAnonimo = false;
      });
 
      NavbarComponent.updateUserStatus.subscribe(res => {
       this.visibleEstudiante = true;
-      this.visiblePerfil = true;
       this.visibleAnonimo = false;
      });
   }
@@ -40,10 +37,8 @@ export class NavbarComponent implements OnInit {
   opcionesMenu() {
     if (localStorage.getItem('estudiante')) {
       this.visibleEstudiante = true;
-      this.visiblePerfil = true;
     } else if (localStorage.getItem('admin')) {
       this.visibleAdmin = true;
-      this.visiblePerfil = true;
     } else {
       this.visibleAnonimo = true;
     }

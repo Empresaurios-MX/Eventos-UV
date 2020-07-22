@@ -30,6 +30,10 @@ import {AsyncPipe} from '../../node_modules/@angular/common';
 import {NotificationsService} from './services/notifications.service'
 import {EstadisticasDataService} from './services/estadisticas.data.service';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {AuthService} from './auth/auth.service';
+import {AuthGuardService} from './auth/auth-guard.service';
+import {AuthGuardAdminService} from './auth/auth-guard-admin.service';
+import { ProfileAdminComponent } from './components/profile-admin/profile-admin.component';
 
 
 @NgModule({
@@ -42,7 +46,8 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
     MyEventsComponent,
     NavbarComponent,
     ProfileComponent,
-    DashboardComponent
+    DashboardComponent,
+    ProfileAdminComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +63,7 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
     AngularFireStorageModule,
     AngularFireMessagingModule
   ],
-  providers: [UsuarioDataService, EventoDataService, AsyncPipe, NotificationsService, EstadisticasDataService],
+  providers: [UsuarioDataService, EventoDataService, AsyncPipe, NotificationsService, EstadisticasDataService, AuthGuardService, AuthGuardAdminService , AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
