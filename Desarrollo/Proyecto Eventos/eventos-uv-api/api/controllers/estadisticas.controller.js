@@ -51,7 +51,7 @@ function eventoPopular(req, res) {
 function eventoParticipantes(req, res) {
     headers.setHeaders(res);
 
-    const sql = "select eventos.id, eventos.nombre as nombre, count(*) as participantes from usuario_eventos join eventos on usuario_eventos.\"eventoId\" = eventos.id group by eventos.id order by participantes desc;";
+    const sql = "select eventos.id, eventos.nombre as nombre, eventos.foto as imagen, count(*) as participantes from usuario_eventos join eventos on usuario_eventos.\"eventoId\" = eventos.id group by eventos.id order by participantes desc;";
 
     usuario_evento.sequelize.query(sql)
         .then(([results, metadata]) => {
