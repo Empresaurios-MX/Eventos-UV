@@ -39,7 +39,7 @@ function calcularRegistros(req, res) {
 function eventoPopular(req, res) {
     headers.setHeaders(res);
 
-    const sql = "select eventos.id, eventos.nombre as nombre, count(*) as participantes from usuario_eventos join eventos on usuario_eventos.\"eventoId\" = eventos.id group by eventos.id order by participantes desc limit 1;";
+    const sql = "select eventos.id, eventos.nombre as nombre, eventos.foto as imagen, count(*) as participantes from usuario_eventos join eventos on usuario_eventos.\"eventoId\" = eventos.id group by eventos.id order by participantes desc limit 1;";
 
     usuario_evento.sequelize.query(sql)
         .then(([results, metadata]) => {

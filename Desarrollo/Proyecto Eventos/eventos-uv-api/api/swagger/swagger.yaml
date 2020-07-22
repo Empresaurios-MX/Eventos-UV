@@ -534,6 +534,8 @@ definitions:
         type: number
       nombre: 
         type: string
+      imagen:
+        type: string
       participantes:
         type: number
     required:
