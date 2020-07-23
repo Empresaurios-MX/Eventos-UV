@@ -23,10 +23,15 @@ export class SignupComponent implements OnInit {
   literatura: boolean;
   especial: boolean;
 
+  smartphone: boolean;
+  escritorio: boolean;
+
   constructor(private service: UsuarioDataService, private router: Router) {
   }
 
   ngOnInit(): void {
+    this.detectarResolucion();
+
     this.usuario = new Usuario();
     this.usuario.rol = 'estudiante';
     this.usuario.intereses = [];
@@ -119,6 +124,14 @@ export class SignupComponent implements OnInit {
       case 'especial':
         this.especial = check;
         break;
+    }
+  }
+
+  detectarResolucion(){
+    if(screen.width < 480){
+      this.smartphone = true;
+    } else {
+      this.escritorio = true;
     }
   }
 }

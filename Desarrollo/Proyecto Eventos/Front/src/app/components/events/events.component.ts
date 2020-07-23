@@ -73,10 +73,8 @@ export class EventsComponent implements OnInit {
     var usuarioGuardado;
     usuarioGuardado = localStorage.getItem('estudiante');
     this.usuario = JSON.parse(usuarioGuardado);
-    console.log(this.usuario);
     this.usuarioService.findOne(this.usuario.id).subscribe(response => {
       this.usuario = response;
-      console.log(this.usuario);
       localStorage.setItem('estudiante', JSON.stringify(this.usuario));
     });
   }

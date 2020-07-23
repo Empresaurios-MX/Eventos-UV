@@ -12,7 +12,7 @@
           <p class="card-text">Hora: {{evento.hora}}</p>
           <p class="card-text">Tags: {{evento.tags}}</p>
           <div class="row">
-            <button class="btn btn-primary  mx-3">Ya no asistire</button>
+            <button class="btn btn-primary mx-3" (click)="eliminarAsistencia(evento.id)">Ya no asistire</button>
           </div>
         </div>
       </div>
@@ -36,7 +36,7 @@
           <p class="card-text">Hora: {{evento.hora}}</p>
           <p class="card-text">Tags: {{evento.tags}}</p>
           <div class="row">
-            <button class="btn btn-danger mx-3">Ya no asistire</button>
+            <button class="btn btn-danger mx-3" (click)="eliminarAsistencia(evento.id)">Ya no asistire</button>
           </div>
         </div>
       </div>

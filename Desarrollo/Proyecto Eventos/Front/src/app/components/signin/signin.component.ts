@@ -15,11 +15,14 @@ export class SigninComponent implements OnInit {
 
   login: Login;
   usuario: Usuario;
+  smartphone: boolean;
+  escritorio: boolean;
 
   constructor(private service: UsuarioDataService, private router: Router) {
   }
 
   ngOnInit(): void {
+    this.detectarResolucion();
     this.login = new Login();
   }
 
@@ -41,6 +44,14 @@ export class SigninComponent implements OnInit {
       });
     } else {
       Swal.fire('Inicio de sesión','Debe seleccionar un rol','warning');
+    }
+  }
+
+  detectarResolucion(){
+    if(screen.width < 480){
+      this.smartphone = true;
+    } else {
+      this.escritorio = true;
     }
   }
 }

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {UsuarioEvento} from '../models/usuario-evento';
 import {Observable, throwError} from 'rxjs';
-import {catchError, retry} from 'rxjs/operators';
+import {catchError, retry, subscribeOn} from 'rxjs/operators';
 import Swal from 'sweetalert2';
 
 @Injectable({
@@ -23,15 +23,30 @@ export class UsuarioEventoDataDataService {
     })
   };
 
+  
+
   create(usuarioEvento: UsuarioEvento): Observable<UsuarioEvento> {
     return this.http.post<UsuarioEvento>(this.apiURL + '/usuario-evento', usuarioEvento, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
 
-  //Componer
-  delete(usuarioEvento: UsuarioEvento) {
-    return this.http.delete(this.apiURL + '/usuario-evento', this.httpOptions)
-      .pipe(retry(1), catchError(this.handleError));
+  delete(usuarioEvento: UsuarioEvento){
+
+    let body = {
+      eventoId: usuarioEvento.eventoId,
+      usuarioId: usuarioEvento.eventoId
+    }
+
+    let options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        Accept: 'application/json'
+      }),
+      body: body
+    }
+
+    return this.http.delete(this.apiURL + '/usuario-evento', options).toPromise().catch(this.handleError);
   }
 
   handleError(error) {

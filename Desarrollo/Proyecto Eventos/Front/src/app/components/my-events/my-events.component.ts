@@ -145,6 +145,10 @@ export class MyEventsComponent implements OnInit {
     this.modalService.open(modal, { size: 'lg' });
   }
 
+  cerrarModal(){
+    this.modalService.dismissAll(true);
+  }
+
   //Metodos CRUD del evento
   createEvento() {
     this.evento.tags = this.getTags();

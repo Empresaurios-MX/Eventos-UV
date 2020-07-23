@@ -1,8 +1,50 @@
-<div class="row">
+<!-- Escritorio -->
+<div class="row" *ngIf="escritorio">
   <div class="d-none d-sm-none d-md-none d-lg-none d-xl-block">
     <img src="../../../assets/images/USBI.jpg" class="img-ts float-xs-left mx-auto d-block container-fluid" height="675">
   </div>
   <div class="mx-lg-auto cardAdjustment">
+    <div class="container p-4">
+      <div class="card">
+        <div class="card-header">
+          Ingresar
+        </div>
+        <div class="card-body">
+          <form (submit)="signIn()">
+
+            <div class="form-group">
+              <input type="email" [(ngModel)]="login.email" name="usuario" class="form-control"
+                placeholder="Correo electronico">
+            </div>
+
+            <div class="form-group">
+              <input type="password" [(ngModel)]="login.password" name="usuario" class="form-control"
+                placeholder="Contraseña">
+            </div>
+
+            <div class="input-group mb-3 ">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="rol">Rol</label>
+              </div>
+              <select id="rol" class="custom-select" [(ngModel)]="login.rol" [ngModelOptions]="{standalone: true}">
+                <option value="estudiante">Estudiante</option>
+                <option value="administrador">Administrador</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">
+              Ingresar
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Movil -->
+<div class="row" *ngIf="smartphone">
+  <div class="offset-1 col-10 cardAdjustment">
     <div class="container p-4">
       <div class="card">
         <div class="card-header">

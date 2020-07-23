@@ -13,10 +13,13 @@ export class DashboardComponent implements OnInit {
   eventoPop: string;
   partEventoPopular: number;
   eventos: any;
+  smartphone: boolean;
+  escritorio:boolean;
 
   constructor(private service: EstadisticasDataService) { }
 
   ngOnInit(): void {
+    this.detectarResolucion();
     this.eventos = [];
     this.getEventosDashboard();
     this.contarUsuarios();
@@ -47,5 +50,13 @@ export class DashboardComponent implements OnInit {
     this.service.usuariosPorEvento().subscribe(value => {
       this.eventos = value;
     });
+  }
+
+  detectarResolucion(){
+    if(screen.width < 480){
+      this.smartphone = true;
+    } else {
+      this.escritorio = true;
+    }
   }
 }

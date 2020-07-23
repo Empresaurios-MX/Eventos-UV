@@ -35,31 +35,28 @@
 
 <!-- Perfil smartphone -->
 <div class="container p-4" *ngIf="smartphone">
-    <div class="card rounded">
+    <div class="card rounded text-center">
         <div class="card-body">
-           
+
             <div class="container p-2">
                 <div class="col-md-8">
                     <div class="card-title">
-                        <h3>¡Bienvenido! {{saludo}} <img src="{{imagenSaludo}}" style="width: 40px;"></h3>
+                        <h3>¡Bienvenido! </h3>
+                        <h3> {{saludo}} <img src="{{imagenSaludo}}" style="width: 40px;"></h3>
                     </div>
                     <div class="container p-md-4">
                         <p class="cart-text">Nombre: {{usuario.nombre}}</p>
                         <p class="card-text">Apellidos: {{usuario.apellidos}}</p>
                         <p class="card-text">Correo electronico: {{usuario.email}}</p>
                     </div>
-                    <h5>Mis interes: </h5>
-                    <div class="container p-md-4">
-                        <p class="cart-text">{{usuario.intereses}}</p>
-                    </div>
                 </div>
             </div>
             <div class="col-sm-2">
-                <button class="btn btn-warning float-left" (click)="mostrarModalPassword(modalPassword)">Cambiar
+                <button class="btn btn-warning " (click)="mostrarModalPassword(modalPassword)">Cambiar
                     contraseña</button>
             </div>
             <div class="col-md-6">
-                <button class="btn btn-info float-right" (click)="mostrarModalActualizar(modaActualizar)">Actualizar
+                <button class="btn btn-info" (click)="mostrarModalActualizar(modaActualizar)">Actualizar
                     datos</button>
             </div>
             <div class="col-md-12">

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Evento } from 'src/app/models/evento';
-import { EventoDataService } from '../../services/evento.data.service';
+import { UsuarioEvento } from 'src/app/models/usuario-evento';
+import { UsuarioEventoDataDataService } from '../../services/usuario-evento.data.service';
+import { UsuarioDataService } from '../../services/usuario.data.service';
 import { Usuario } from '../../models/usuario';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
@@ -18,7 +20,19 @@ export class EventsConfirmedComponent implements OnInit {
   smartphone: boolean;
   escritorio: boolean;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private usuarioEventoService: UsuarioEventoDataDataService, private usuarioService: UsuarioDataService) {
+   
+  }
+
+  getEventos(){
+    this.eventos = [];
+    var usuarioGuardado = localStorage.getItem('estudiante');
+    this.usuario = JSON.parse(usuarioGuardado);
+    this.eventos = this.usuario.eventos;
+  }
+
+  ngOnInit(): void {
+    this.detectarResolucion();
     this.eventos = [];
     var usuarioGuardado = localStorage.getItem('estudiante');
     this.usuario = JSON.parse(usuarioGuardado);
@@ -29,16 +43,31 @@ export class EventsConfirmedComponent implements OnInit {
     } 
   }
 
-  ngOnInit(): void {
-    this.detectarResolucion();
-  }
-
   detectarResolucion(){
     if(screen.width < 480){
       this.smartphone = true;
     } else {
       this.escritorio = true;
     }
+  }
+
+  eliminarAsistencia(eventoID){
+    let usuarioEvento = new UsuarioEvento();
+    usuarioEvento.usuarioId = this.usuario.id;
+    usuarioEvento.eventoId = eventoID;
+    this.usuarioEventoService.delete(usuarioEvento);
+    this.refrescarStorage();
+    this.getEventos();
+  }
+
+  refrescarStorage(){
+    var usuarioGuardado;
+    usuarioGuardado = localStorage.getItem('estudiante');
+    this.usuario = JSON.parse(usuarioGuardado);
+    this.usuarioService.findOne(this.usuario.id).subscribe(response => {
+      this.usuario = response;
+      localStorage.setItem('estudiante', JSON.stringify(this.usuario));
+    });
   }
 
 }
