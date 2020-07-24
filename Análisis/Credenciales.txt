@@ -1,6 +1,6 @@
 Administrador:
 	correo: admin@uventos.com.mx
-	contraseña: uventos
+	contraseña: root
 
 Estudiantes:
 
@@ -10,12 +10,28 @@ Daniel:
 
 Ibet:
 	correo: ortizibet4@gmail.com
-	contraseña: ortizibet4@gmail.com
+	contraseña: uventos02contraibet
 
 Luis:
-	correo: luis9925@gmail.com 
+	correo: luis9925.la@gmail.com 
 	contraseña: uventos03contraluis
 
 Aldo:
 	correo: vitome77@hotmail.com
 	contraseña: uventos04contraldo
+
+
+
+
+
+
+Credenciales de la Base de datos:
+
+	"production": {
+    "username": "awsceufk",
+    "password": "ycgAUXe0OXf-S6LnVv6PoRe1EkqrnbjP",
+    "database": "awsceufk",
+    "host": "otto.db.elephantsql.com",
+    "dialect": "postgresql",
+    "operatorsAliases": 0
+  }
