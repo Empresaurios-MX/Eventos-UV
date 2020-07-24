@@ -46,6 +46,15 @@ export class EventoDataService {
   }
 
   update(id, evento: Evento): Observable<Evento> {
+
+    const fechaFragments = evento.fecha.split('-');
+    const horaFragments = evento.hora.split(':');
+    const realDate = new Date(fechaFragments[2] + '-' + fechaFragments[1] + '-' + fechaFragments[0]);
+
+    realDate.setHours(parseInt(horaFragments[0], 0), parseInt(horaFragments[1], 0), parseInt(horaFragments[2], 0));
+
+    evento.fecha = realDate.toISOString();
+
     return this.http.put<Evento>(this.apiURL + '/eventos/' + id, evento, this.httpOptions).pipe(retry(1), catchError(this.handleError));
   }
 
