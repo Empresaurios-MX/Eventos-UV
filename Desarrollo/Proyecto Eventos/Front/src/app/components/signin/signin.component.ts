@@ -32,10 +32,13 @@ export class SigninComponent implements OnInit {
         NavbarComponent.updateUserStatus.next(true); 
         this.usuario = response;
         let rol;
-        if(response.rol){
+        if(response.rol == 'estudiante'){
           rol = 'estudiante';
         } else {
           rol = 'admin'
+        }
+        if(response.rol!=this.login.rol){
+          Swal.fire('Ese no es tu rol','No seas mañoso','warning');
         }
         localStorage.setItem(rol, JSON.stringify(this.usuario));
         this.router.navigate(['/eventos']);
@@ -46,10 +49,13 @@ export class SigninComponent implements OnInit {
         NavbarComponent.updateAdminStatus.next(true);  
         this.usuario = response;
         let rol;
-        if(response.rol){
-          rol = 'estudiante';
+        if(response.rol == 'administrador'){
+          rol = 'admin';
         } else {
-          rol = 'admin'
+          rol = 'estudiante'
+        }
+        if(response.rol!=this.login.rol){
+          Swal.fire('Ese no es tu rol','No seas mañoso','warning');
         }
         localStorage.setItem(rol, JSON.stringify(this.usuario));
         this.router.navigate(['/miseventos']);
