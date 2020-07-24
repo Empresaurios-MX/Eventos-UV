@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit {
   saludo: string;
   imagenSaludo: string;
   newPassword: string;
+  confirmPassword: string;
 
   smartphone: boolean;
   escritorio: boolean;
@@ -66,14 +67,19 @@ export class ProfileComponent implements OnInit {
     this.modalService.open(modal, { size: 'lg', centered: true });
   }
 
-  cambiarPass(newPassword){
-    this.usuario.password = newPassword;
-    this.usuarioService.update(this.usuario.id, this.usuario).subscribe(res => {
-      if(res){
-        this.modalService.dismissAll(true);
-        Swal.fire('Contraseña actualizada', 'La contraseña ha sido actualizada con exito', 'success');
-      }
-    });
+  cambiarPass(newPassword, confirmPasssword) {
+    if (newPassword === confirmPasssword) {
+      this.usuario.password = newPassword;
+      this.usuarioService.update(this.usuario.id, this.usuario).subscribe(res => {
+        if (res) {
+          this.modalService.dismissAll(true);
+          Swal.fire('Contraseña actualizada', 'La contraseña ha sido actualizada con exito', 'success');
+        }
+      });
+    } else {
+      Swal.fire('Contraseña no actualizada', 'Las contraseñas no coinciden, intentelo de nuevo', 'error');
+    }
+
   }
 
   mostrarModalActualizar(modal) {

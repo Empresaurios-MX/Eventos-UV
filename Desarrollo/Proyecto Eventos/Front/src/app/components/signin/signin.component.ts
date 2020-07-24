@@ -29,17 +29,29 @@ export class SigninComponent implements OnInit {
   signIn() {
     if (this.login.rol === 'estudiante') {
       this.service.login(this.login).subscribe(response => {
-        NavbarComponent.updateUserStatus.next(true); // here! 
+        NavbarComponent.updateUserStatus.next(true); 
         this.usuario = response;
-        localStorage.setItem('estudiante', JSON.stringify(this.usuario));
+        let rol;
+        if(response.rol){
+          rol = 'estudiante';
+        } else {
+          rol = 'admin'
+        }
+        localStorage.setItem(rol, JSON.stringify(this.usuario));
         this.router.navigate(['/eventos']);
       });
       
     } else if (this.login.rol === 'administrador') {
       this.service.login(this.login).subscribe(response => {
-        NavbarComponent.updateAdminStatus.next(true); // here! 
+        NavbarComponent.updateAdminStatus.next(true);  
         this.usuario = response;
-        localStorage.setItem('admin', JSON.stringify(this.usuario));
+        let rol;
+        if(response.rol){
+          rol = 'estudiante';
+        } else {
+          rol = 'admin'
+        }
+        localStorage.setItem(rol, JSON.stringify(this.usuario));
         this.router.navigate(['/miseventos']);
       });
     } else {

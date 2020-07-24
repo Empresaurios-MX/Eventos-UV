@@ -70,7 +70,6 @@ export class MyEventsComponent implements OnInit {
     this.getEventos();
     this.falseTags();
     this.detectarResolucion();
-    this.enviarNotificacion();
   }
 
   //Firebase

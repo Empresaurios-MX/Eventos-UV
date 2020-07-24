@@ -78,13 +78,21 @@
                     <label for="recipient-name" class="col-form-label col-sm-3">Nueva contraseña: </label>
                     <input type="password" [(ngModel)]="newPassword" name="password" class="form-control col-lg-8"
                         id="recipient-name" autocomplete="off">
+
+                </div>
+                <br>
+                <div class="form-inline">
+                    <label for="recipient-name" class="col-form-label col-sm-3">Confirmar contraseña: </label>
+                    <input type="password" [(ngModel)]="confirmPassword" name="password" class="form-control col-lg-8"
+                        id="recipient-name" autocomplete="off">
+
                 </div>
             </form>
         </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal"
-            (click)="cambiarPass(newPassword)">Confirmar</button>
+            (click)="cambiarPass(newPassword, confirmPassword)">Confirmar</button>
     </div>
 </ng-template>
 
