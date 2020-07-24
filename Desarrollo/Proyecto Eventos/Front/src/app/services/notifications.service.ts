@@ -15,23 +15,37 @@ export class NotificationsService {
 
   currentMessage = new BehaviorSubject(null);
 
-  constructor(private angularFireDB: AngularFireDatabase ,private angularFireAuth: AngularFireAuth, private angularFireMessaging: AngularFireMessaging, private http: HttpClient) {
-    
-  }
+  constructor(private angularFireDB: AngularFireDatabase, private angularFireAuth: AngularFireAuth, private angularFireMessaging: AngularFireMessaging, private http: HttpClient) {
 
-  //Enviar notificacion sin tener abierto la aplicacion web
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      Accept: 'application/json'
-    })
-  };
+  }
 
   apiSend = 'https://fcm.googleapis.com/fcm/send';
 
-  sendNotification(notification: Notification){
-    return this.http.post(this.apiSend, notification, this.httpOptions)
+  sendNotification(notification: Notification) {
+
+    let body = {
+      notification: {
+        title: notification.title,
+        body: notification.body,
+        click_action: notification.link,
+        icon: notification.icon
+      },
+      to:
+      "c5HcgB5mwLxp3nRtJDT_Ag:APA91bFa7eyfMYCCtsHqGGM89LRK2Ay5HP_mz8KfbdZ1Tq8mwI0WixTGeoiIM3Qd74Anus-0uJlYFzsX05XJlEkHuFNZTUTvjHUWQshbkNGT3me2768eUm3yON_p9cyfboZL8h4XyX9Q"
+    }
+
+    //Enviar notificaciones en segundo plano
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        Accept: 'application/json',
+        'Authorization': 'key = AAAACnh-Ftk:APA91bHV2-NOwszkbxBCOIzB-BsUh4-eDAjROotAV650wt6uIPYeD1-kabw1J3YI1g7wAOefFep-fu2bofXOmgD39m4U5Sa5QCLkTqBkSmFLTQ2ieAn-lI23UBfcczQ_LmSg80-5Bl3L'
+      }),
+      body: body
+    };
+
+    return this.http.post(this.apiSend, httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
 
@@ -46,7 +60,7 @@ export class NotificationsService {
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
 
-    Swal.fire('Error','Algo ha salido mal, por favor intentalo más tarde','error');
+    Swal.fire('Error', 'Algo ha salido mal, por favor intentalo más tarde', 'error');
 
     return throwError(errorMessage);
   }

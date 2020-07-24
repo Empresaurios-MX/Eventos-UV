@@ -87,6 +87,7 @@ export class ProfileAdminComponent implements OnInit {
   }
 
   actualizarDatos() {
+    this.usuario.password = '';
     this.usuarioService.update(this.usuario.id, this.usuario).subscribe(res => {
       if (res) {
         this.modalService.dismissAll(true);

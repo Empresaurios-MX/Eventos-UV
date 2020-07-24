@@ -1,5 +1,6 @@
 import { Component, OnInit, Injectable } from '@angular/core';
-import { Evento } from '../../models/evento'
+import { Evento } from '../../models/evento';
+import { Notification } from '../../models/notification'
 import { EventoDataService } from '../../services/evento.data.service';
 import { NgbModal, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
@@ -69,6 +70,7 @@ export class MyEventsComponent implements OnInit {
     this.getEventos();
     this.falseTags();
     this.detectarResolucion();
+    this.enviarNotificacion();
   }
 
   //Firebase
@@ -125,14 +127,6 @@ export class MyEventsComponent implements OnInit {
     this.toastr.success("Evento actualizado exitosamente");
   }
 
-  //Metodo para enviar notificacion de Firebase
-  enviarNotificacion() {
-    const userId = 'user001';
-    this.notificationService.requestPermission(userId);
-    this.message = this.notificationService.currentMessage;
-    this.notificationService.receiveMessage();
-  }
-
   //Metodos de los modales
   mostrarModal(modal) {
     this.evento = new Evento();
@@ -145,7 +139,7 @@ export class MyEventsComponent implements OnInit {
     this.modalService.open(modal, { size: 'lg' });
   }
 
-  cerrarModal(){
+  cerrarModal() {
     this.modalService.dismissAll(true);
   }
 
@@ -157,8 +151,16 @@ export class MyEventsComponent implements OnInit {
       if (res) {
         this.notificacionExitosaCrear();
         this.modalService.dismissAll(true);
+
+        //Notificacion de evento
+        let notificacion = new Notification();
+        notificacion.title = this.evento.nombre;
+        notificacion.body = '¡Un nuevo evento ha aparecido!';
+        notificacion.icon = this.evento.foto;
+        notificacion.link = 'https://eventos-uv-dev.web.app/';
+        this.notificationService.sendNotification(notificacion);
+
         this.getEventos();
-        this.enviarNotificacion();
       }
     })
   }
@@ -286,8 +288,8 @@ export class MyEventsComponent implements OnInit {
     }
   }
 
-  detectarResolucion(){
-    if(screen.width < 480){
+  detectarResolucion() {
+    if (screen.width < 480) {
       this.smartphone = true;
     } else {
       this.escritorio = true;

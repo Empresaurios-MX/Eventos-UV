@@ -6,6 +6,8 @@ import { Usuario } from '../../models/usuario';
 import { UsuarioEvento } from '../../models/usuario-evento';
 import { Evento } from 'src/app/models/evento';
 import { ToastrService } from 'ngx-toastr';
+import { NotificationsService } from '../../services/notifications.service';
+
 
 @Component({
   selector: 'app-tasks',
@@ -21,7 +23,9 @@ export class EventsComponent implements OnInit {
   smartphone: boolean;
   escritorio: boolean;
 
-  constructor(private eventService: EventoDataService, private eventUsuarioService: UsuarioEventoDataDataService, private toastr: ToastrService, private usuarioService: UsuarioDataService) {
+  message;
+
+  constructor(private eventService: EventoDataService, private eventUsuarioService: UsuarioEventoDataDataService, private toastr: ToastrService, private usuarioService: UsuarioDataService,  private notificationService: NotificationsService) {
     this.eventos = [];
     this.usuarioEvento = new UsuarioEvento();
     var usuarioGuardado = localStorage.getItem('estudiante');
@@ -31,6 +35,15 @@ export class EventsComponent implements OnInit {
   ngOnInit() {
     this.getEventos();
     this.detectarResolucion();
+    this.enviarNotificacion();
+  }
+
+  //Metodo para recibir notificacion de Firebase
+  enviarNotificacion() {
+    const userId = 'user001';
+    this.notificationService.requestPermission(userId);
+    this.message = this.notificationService.currentMessage;
+    this.notificationService.receiveMessage();
   }
 
   asistirEvento(id: number){
