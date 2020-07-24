@@ -1,0 +1,21 @@
+Administrador:
+	correo: admin@uventos.com.mx
+	contraseña: uventos
+
+Estudiantes:
+
+Daniel:
+	correo: dnieln7@gmail.com 
+	contraseña: uventos01contradani
+
+Ibet:
+	correo: ortizibet4@gmail.com
+	contraseña: ortizibet4@gmail.com
+
+Luis:
+	correo: luis9925@gmail.com 
+	contraseña: uventos03contraluis
+
+Aldo:
+	correo: vitome77@hotmail.com
+	contraseña: uventos04contraldo
