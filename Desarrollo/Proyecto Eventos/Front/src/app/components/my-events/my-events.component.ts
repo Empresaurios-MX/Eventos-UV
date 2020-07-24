@@ -134,7 +134,7 @@ export class MyEventsComponent implements OnInit {
   }
 
   mostrarModalEditar(modal) {
-    this.getTags();
+    this.falseTags();
     this.modalService.open(modal, { size: 'lg' });
   }
 
@@ -158,18 +158,19 @@ export class MyEventsComponent implements OnInit {
         notificacion.icon = this.evento.foto;
         notificacion.link = 'https://eventos-uv-dev.web.app/';
         this.notificationService.sendNotification(notificacion);
-
         this.getEventos();
       }
     })
   }
 
   updateEvento() {
+    this.evento.tags = this.getTags();
     this.eventService.update(this.evento.id, this.evento).subscribe(res => {
       if (res) {
         this.notificacionExitosaEditar();
         this.modalService.dismissAll(true);
         this.getEventos();
+        this.falseTags();
       }
     });
 
@@ -178,6 +179,33 @@ export class MyEventsComponent implements OnInit {
   getEvento(id) {
     this.eventService.findOne(id).subscribe(res => {
       this.evento = res;
+      if(this.evento.tags.includes('Arte')){
+        this.arte = true;
+      }
+      if(this.evento.tags.includes('Musica')){
+        this.musica = true;
+      }
+      if(this.evento.tags.includes('Ciencia')){
+        this.ciencia = true;
+      }
+      if(this.evento.tags.includes('Baile')){
+        this.baile = true;
+      }
+      if(this.evento.tags.includes('Medicina')){
+        this.medicina = true;
+      }
+      if(this.evento.tags.includes('Cultura')){
+        this.cultura = true;
+      }
+      if(this.evento.tags.includes('Recreacion')){
+        this.recreacion = true;
+      }
+      if(this.evento.tags.includes('Literatura')){
+        this.literatura = true;
+      }
+      if(this.evento.tags.includes('Especial')){
+        this.especial = true;
+      }
     });
   }
 

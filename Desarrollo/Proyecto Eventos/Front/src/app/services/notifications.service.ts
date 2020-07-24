@@ -24,14 +24,15 @@ export class NotificationsService {
   sendNotification(notification: Notification) {
 
     let body = {
-      notification: {
-        title: notification.title,
-        body: notification.body,
-        click_action: notification.link,
-        icon: notification.icon
+      'notification': {
+        'title': notification.title,
+        'body': notification.body,
+        'click_action': notification.link,
+        'icon': notification.icon
       },
-      to:
-      "c5HcgB5mwLxp3nRtJDT_Ag:APA91bFa7eyfMYCCtsHqGGM89LRK2Ay5HP_mz8KfbdZ1Tq8mwI0WixTGeoiIM3Qd74Anus-0uJlYFzsX05XJlEkHuFNZTUTvjHUWQshbkNGT3me2768eUm3yON_p9cyfboZL8h4XyX9Q"
+      "to":
+      "eq8VQsnbDOg678vaflCUhb:APA91bEKKXWIotv-b1faFHBpTLlYaqmuEmbO38YA4K4o41-EHCFtTSx4HeIyCvZkuyawlxfvhY3xbTQNCPgIJ0dJwytqKpXltMtMqrPWW1hnDSd2gIKEeIP1KbOX0hqWdTPmafTO6REC"
+
     }
 
     //Enviar notificaciones en segundo plano

@@ -5,6 +5,7 @@ import { UsuarioEventoDataDataService } from '../../services/usuario-evento.data
 import { UsuarioDataService } from '../../services/usuario.data.service';
 import { Usuario } from '../../models/usuario';
 import Swal from 'sweetalert2';
+import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
 @Component({
@@ -20,53 +21,60 @@ export class EventsConfirmedComponent implements OnInit {
   smartphone: boolean;
   escritorio: boolean;
 
-  constructor(private router: Router, private usuarioEventoService: UsuarioEventoDataDataService, private usuarioService: UsuarioDataService) {
-   
+  constructor(private toastr: ToastrService, private router: Router, private usuarioEventoService: UsuarioEventoDataDataService, private usuarioService: UsuarioDataService) {
+
   }
 
-  getEventos(){
+  getEventos() {
     this.eventos = [];
     var usuarioGuardado = localStorage.getItem('estudiante');
     this.usuario = JSON.parse(usuarioGuardado);
     this.eventos = this.usuario.eventos;
+    if (this.eventos === null) {
+      Swal.fire('Error', 'No has confirmado tu asistencia a ningún evento', 'error');
+      this.router.navigate(['/eventos']);
+    }
   }
 
   ngOnInit(): void {
+    this.refrescarStorage();
     this.detectarResolucion();
-    this.eventos = [];
-    var usuarioGuardado = localStorage.getItem('estudiante');
-    this.usuario = JSON.parse(usuarioGuardado);
-    this.eventos = this.usuario.eventos;
-    if(this.eventos === null){
-      Swal.fire('Error', 'No has confirmado tu asistencia a ningún evento', 'error');
-      this.router.navigate(['/eventos']);
-    } 
+    this.getEventos();
   }
 
-  detectarResolucion(){
-    if(screen.width < 480){
+  detectarResolucion() {
+    if (screen.width < 480) {
       this.smartphone = true;
     } else {
       this.escritorio = true;
     }
   }
 
-  eliminarAsistencia(eventoID){
+  notificacionExitosaNoAsistir() {
+    this.toastr.error("Su asistencia fue desconfirmada para el evento");
+  }
+
+  eliminarAsistencia(eventoID) {
     let usuarioEvento = new UsuarioEvento();
     usuarioEvento.usuarioId = this.usuario.id;
     usuarioEvento.eventoId = eventoID;
-    this.usuarioEventoService.delete(usuarioEvento);
-    this.refrescarStorage();
-    this.getEventos();
+    this.usuarioEventoService.delete(usuarioEvento).then(res => {
+      if (res) {
+        this.notificacionExitosaNoAsistir();
+        this.refrescarStorage();
+        this.getEventos();
+      }
+    });
+
   }
 
-  refrescarStorage(){
+  refrescarStorage() {
     var usuarioGuardado;
     usuarioGuardado = localStorage.getItem('estudiante');
     this.usuario = JSON.parse(usuarioGuardado);
     this.usuarioService.findOne(this.usuario.id).subscribe(response => {
-      this.usuario = response;
-      localStorage.setItem('estudiante', JSON.stringify(this.usuario));
+      console.log(response);
+      localStorage.setItem('estudiante', JSON.stringify(response));
     });
   }
 
