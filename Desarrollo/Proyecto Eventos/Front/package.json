@@ -28,7 +28,7 @@
     "@types/gsap": "^1.20.2",
     "bootstrap": "^4.4.0",
     "firebase": "^7.15.4",
-    "highcharts": "^8.1.2",
+    "highcharts": "^9.0.0",
     "highcharts-angular": "^2.4.0",
     "ng2-date-picker": "^9.0.0",
     "ng2-datepicker": "^3.1.1",
